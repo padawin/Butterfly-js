@@ -1,0 +1,259 @@
+<html>
+	<head>
+		<script type="text/javascript" src="js/Butterfly.new.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<header>
+			<h1>Butterfly - One more Javascript lib.</h1>
+		</header>
+		<div id="summary">
+			<ul>
+				<li><a href="#id">B.$id(id)</a></li>
+				<li><a href="#hasClass">B.hasClass(element, class)</a></li>
+				<li><a href="#addClass">B.addClass(element, class)</a></li>
+				<li><a href="#removeClass">B.removeClass(element, class)</a></li>
+				<li><a href="#replaceClass">B.replaceClass(element, oldClass, newClass, append)</a></li>
+				<li><a href="#addEvent">B.addEvent(item,event,action,opt,args)</a></li>
+			</ul>
+		</div>
+		<div id="main">
+			<a name="id"></a><h2>B.$id(id)</h2>
+			<section>
+				<p>
+				This function returns the element having as id attribute the id
+				given in arguments.
+				</p>
+				<p>
+				If the given argument is already a DOM node, it'll be the
+				returned element of the function.
+				</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;div id="test-id"&gt;&lt;/div&gt;
+&lt;button onclick="B.$id('foo').innerHTML = 'some content'"&gt;Click me&lt;/button&gt;
+					</pre>
+				</div>
+				<p>Demo:</p>
+				<div class="demo">
+					<div id="test-id"></div>
+					<button onclick="B.$id('test-id').innerHTML = 'some content';">Click me</button>
+				</div>
+			</section>
+			<!-- Working with classes -->
+			<a name="hasClass"></a><h2>B.hasClass(element, class)</h2>
+			<section>
+				<p>
+				This function returns true if the element given in first argument
+				has the css class given in second argument.
+				</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;div id="test-hasclass" class="someclass someotherclass"&gt;&lt;/div&gt;
+&lt;button onclick="alert(B.hasClass('test-hasclass', 'someclass') ? 'yes' : 'no';"&gt;Does "test-hasclass" has the class "someclass" ?&lt;/button&gt;
+&lt;button onclick="alert(B.hasClass('test-hasclass', 'newclass') ? 'yes' : 'no';"&gt;Does "test-hasclass" has the class "newclass" ?&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<div id="test-hasclass" class="someclass someotherclass"></div>
+					<button onclick="alert(B.hasClass('test-hasclass', 'someclass') ? 'yes' : 'no');">Does "test-hasclass" has the class "someclass" ?</button>
+					<button onclick="alert(B.hasClass('test-hasclass', 'newclass') ? 'yes' : 'no');">Does "test-hasclass" has the class "newclass" ?</button>
+				</div>
+			</section>
+			<a name="addClass"></a><h2>B.addClass(element, class)</h2>
+			<section>
+				<p>
+				This function adds the class given in second argument to the
+				element given in first argument.
+				</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+.classA {
+	color: red;
+}
+.classB {
+	font-weight: bold;
+}
+&lt;/style&gt;
+&lt;div id="test-addclass"&gt;I have no class...yet&lt;/div&gt;
+&lt;button onclick="B.addClass('test-addclass', 'classA');"&gt;Add class "classA" to "test-addclass"&lt;/button&gt;
+&lt;button onclick="B.addClass('test-addclass', 'classB');"&gt;Add class "classB" to "test-addclass"&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<style type="text/css">
+					.classA {
+						color: red;
+					}
+					.classB {
+						font-weight: bold;
+					}
+					</style>
+					<div id="test-addclass">I have no class...yet</div>
+					<button onclick="B.addClass('test-addclass', 'classA');">Add class "classA" to "test-addclass"</button>
+					<button onclick="B.addClass('test-addclass', 'classB');">Add class "classB" to "test-addclass"</button>
+				</div>
+			</section>
+			<a name="removeClass"></a><h2>B.removeClass(element, class)</h2>
+			<section>
+				<p>
+				This function remove the class given in second argument from the
+				element given in first argument.
+				</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+.removeclassA {
+	color: red;
+}
+.removeclassB {
+	font-weight: bold;
+}
+&lt;/style&gt;
+&lt;div id="test-removeclass" class="removeclassA removeclassB"&gt;I have some class&lt;/div&gt;
+&lt;button onclick="B.removeClass('test-removeclass', 'removeclassA');"&gt;Remove class "removeclassA" from "test-removeclass"&lt;/button&gt;
+&lt;button onclick="B.removeClass('test-removeclass', 'removeclassB');"&gt;Remove class "removeclassB" from "test-removeclass"&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<style type="text/css">
+					.removeclassA {
+						color: red;
+					}
+					.removeclassB {
+						font-weight: bold;
+					}
+					</style>
+					<div id="test-removeclass" class="removeclassA removeclassB">I have some class</div>
+					<button onclick="B.removeClass('test-removeclass', 'removeclassA');">Remove class "removeclassA" from "test-removeclass"</button>
+					<button onclick="B.removeClass('test-removeclass', 'removeclassB');">Remove class "removeclassB" from "test-removeclass"</button>
+				</div>
+			</section>
+			<a name="replaceClass"></a><h2>B.replaceClass(element, oldClass, newClass, append)</h2>
+			<section>
+				<p>
+				This function replace the class given in second argument by the
+				class given in third argument for the element given in first
+				argument.
+				</p>
+				<p>A fourth boolean argument can be given. If its value is true
+				and the element does not have the searched class, the new class
+				will still be set.</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+.replaceclassA {
+	color: red;
+}
+.replaceclassB {
+	color: blue;
+}
+&lt;/style&gt;
+&lt;div id="test-replaceclass" class="replaceclassA"&gt;I have a class which will be replaced&lt;/div&gt;
+&lt;button onclick="B.replaceClass('test-replaceclass', 'replaceclassA', 'replaceclassB');"&gt;Replace "test-replaceclass"'s class "replaceclassA" by "replaceclassB"&lt;/button&gt;
+&lt;button onclick="B.replaceClass('test-replaceclass', 'replaceclassB', 'replaceclassA');"&gt;Replace "test-replaceclass"'s class "replaceclassB" by "replaceclassA"&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<style type="text/css">
+					.replaceclassA {
+						color: red;
+					}
+					.replaceclassB {
+						color: blue;
+					}
+					</style>
+					<div id="test-replaceclass" class="replaceclassA">I have a class which will be replaced</div>
+					<button onclick="B.replaceClass('test-replaceclass', 'replaceclassA', 'replaceclassB');">Replace "test-replaceclass"'s class "replaceclassA" by "replaceclassB"</button>
+					<button onclick="B.replaceClass('test-replaceclass', 'replaceclassB', 'replaceclassA');">Replace "test-replaceclass"'s class "replaceclassB" by "replaceclassA"</button>
+				</div>
+			</section>
+
+			<!-- Working with events -->
+			<a name="addEvent"></a><h2>B.addEvent(item,event,action,opt,args)</h2>
+			<section>
+				<p>
+				This function binds an event given in second argument to the element
+				given in first argument.
+				</p>
+				<p>
+				When the event is fired, the action given in third argument is executed.
+				</p>
+				<p>
+				The arguments given in fifth argument will be passed to the executed action.
+				</p>
+				<h3>Available options</h3>
+				<ul>
+					<li>skipEvent</li>
+					<li>scope</li>
+					<li>propagate</li>
+				</ul>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;div id="test-addevent"&gt;I've been clicked 0 time&lt;/div&gt;
+&lt;button id="clickbutton"&gt;Click me&lt;/button&gt;
+&lt;script type="text/javascript"&gt;
+	var clicks = 0, e = B.$id("test-addevent"), html = '';
+	B.addEvent(B.$id('clickbutton'), 'click', function() {
+		clicks++;
+		html = "I've been clicked ";
+		switch (clicks) {
+			case 1:
+				html += 'once';
+				break;
+			case 2:
+				html += 'twice';
+				break;
+			default:
+				html += clicks + ' times';
+				break;
+		}
+		e.innerHTML = html;
+	});
+&lt;/script&gt;
+					</pre>
+				</div>
+				<p>Demo:</p>
+				<div class="demo">
+					<div id="test-addevent">I've been clicked 0 time</div>
+					<button id="clickbutton">Click me</button>
+					<script type="text/javascript">
+						var clicks = 0, e = B.$id("test-addevent"), html = '';
+						B.addEvent(B.$id('clickbutton'), 'click', function() {
+							clicks++;
+							html = "I've been clicked ";
+							switch (clicks) {
+								case 1:
+									html += 'once';
+									break;
+								case 2:
+									html += 'twice';
+									break;
+								default:
+									html += clicks + ' times';
+									break;
+							}
+							e.innerHTML = html;
+						});
+					</script>
+				</div>
+			</section>
+		</div>
+		<footer></footer>
+	</body>
+</html>

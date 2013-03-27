@@ -1,0 +1,15 @@
+#summary {
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	background-color: white;
+	width: 25%;
+}
+
+#main {
+	width: 75%;
+}
+
+#main pre.code {
+	overflow: auto;
+}
