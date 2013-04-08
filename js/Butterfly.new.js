@@ -115,7 +115,7 @@
 
 		if(item.attachEvent) item.attachEvent('on'+event,item[event+action]);
 		else if(item.addEventListener) item.addEventListener(event,item[event+action],opt['propagate'] == true);
-	}
+	};
 
 	B.removeEvent=function(item,event,action,opt,args){
 		opt=opt||{};
