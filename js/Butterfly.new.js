@@ -108,7 +108,7 @@
 		args=args||new Array();
 		item=$id(item);
 		item[event+action]=function(evt){
-			var scope=('scope' in opt?opt['scope']:window);
+			var scope=$id('scope' in opt?opt['scope']:window);
 			if(!'skipEvent' in opt) action.apply(scope,args.concat([evt]));
 			else action.apply(scope,args);
 		};
