@@ -206,8 +206,17 @@
 				<h3>Example</h3>
 				<div class="example">
 					<pre class="code">
+&lt;style type="text/css"&gt;
+	.eventbloc {
+		width: 100px;
+		height: 100px;
+		border: 1px solid black;
+	}
+&lt;/style&gt;
 &lt;div id="test-addevent"&gt;I've been clicked 0 time&lt;/div&gt;
-&lt;button id="clickbutton"&gt;Click me&lt;/button&gt;
+&lt;button id="clickbutton"&gt;Click me&lt;/button&gt;&lt;br /&gt;
+&lt;span&gt;Mouse events:&lt;/span&gt;
+&lt;div id="eventbloc" class="eventbloc"&gt;&lt;/div&gt;
 &lt;script type="text/javascript"&gt;
 	var clicks = 0, e = B.$id("test-addevent"), html = '';
 	B.addEvent(B.$id('clickbutton'), 'click', function() {
@@ -226,13 +235,36 @@
 		}
 		e.innerHTML = html;
 	});
+
+
+	B.addEvent('eventbloc', 'mouseover', function() {
+		this.innerHTML = "Mouse over";
+	}, {scope: 'eventbloc', skipEvent: true});
+	B.addEvent('eventbloc', 'mouseout', function() {
+		this.innerHTML = "Mouse out";
+	}, {scope: 'eventbloc', skipEvent: true});
+	B.addEvent('eventbloc', 'mousemove', function(e) {
+		this.innerHTML = "Mouse move (" + e.clientX + ", " + e.clientY + ")";
+	}, {scope: 'eventbloc'});
+	B.addEvent('eventbloc', 'click', function() {
+		this.innerHTML = "Click";
+	}, {scope: 'eventbloc', skipEvent: true});
 &lt;/script&gt;
 					</pre>
 				</div>
 				<h3>Demo:</h3>
 				<div class="demo">
+					<style type="text/css">
+						.eventbloc {
+							width: 100px;
+							height: 100px;
+							border: 1px solid black;
+						}
+					</style>
 					<div id="test-addevent">I've been clicked 0 time</div>
-					<button id="clickbutton">Click me</button>
+					<button id="clickbutton">Click me</button><br />
+					<span>Mouse events:</span>
+					<div id="eventbloc" class="eventbloc"></div>
 					<script type="text/javascript">
 						var clicks = 0, e = B.$id("test-addevent"), html = '';
 						B.addEvent(B.$id('clickbutton'), 'click', function() {
@@ -251,6 +283,20 @@
 							}
 							e.innerHTML = html;
 						});
+
+
+						B.addEvent('eventbloc', 'mouseover', function() {
+							this.innerHTML = "Mouse over";
+						}, {scope: 'eventbloc', skipEvent: true});
+						B.addEvent('eventbloc', 'mouseout', function() {
+							this.innerHTML = "Mouse out";
+						}, {scope: 'eventbloc', skipEvent: true});
+						B.addEvent('eventbloc', 'mousemove', function(e) {
+							this.innerHTML = "Mouse move (" + e.clientX + ", " + e.clientY + ")";
+						}, {scope: 'eventbloc'});
+						B.addEvent('eventbloc', 'click', function() {
+							this.innerHTML = "Click";
+						}, {scope: 'eventbloc', skipEvent: true});
 					</script>
 				</div>
 			</section>
