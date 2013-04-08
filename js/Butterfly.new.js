@@ -106,6 +106,7 @@
 	B.addEvent=function(item,event,action,opt,args){
 		opt=opt||{};
 		args=args||new Array();
+		item=$id(item);
 		item[event+action]=function(evt){
 			var scope=('scope' in opt?opt['scope']:window);
 			if(!'skipEvent' in opt) action.apply(scope,args.concat([evt]));
@@ -119,7 +120,7 @@
 	B.removeEvent=function(item,event,action,opt,args){
 		opt=opt||{};
 		args=args||new Array();
-
+		item=$id(item);
 		if(item.detachEvent) item.detachEvent('on'+event,item[event+action]);
 		else if(item.removeEventListener) item.removeEventListener(event,item[event+action],opt['propagate'] == true);
 		delete item[event+action];
