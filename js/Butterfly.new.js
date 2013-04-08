@@ -89,7 +89,7 @@
 			}
 		}
 		//if the parent is given, the created node will be put in it
-		if (ex($id(p)) || p && ex($id(p.element))) {
+		if(ex($id(p)) || p && ex($id(p.element))){
 			if(!ex(p.element)) $id(p)[appendChild](e);
 			else{
 				//if the elem has to be inserted before an element
