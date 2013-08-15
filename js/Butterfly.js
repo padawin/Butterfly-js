@@ -162,8 +162,8 @@
 		return -1;
 	}
 
-	Object.prototype.indexOf = Object.prototype.indexOf || indexOf;
-	Array.prototype.indexOf = Array.prototype.indexOf || indexOf;
+	Object.prototype.indexOf || (Object.prototype.indexOf = indexOf);
+	Array.prototype.indexOf || (Array.prototype.indexOf = indexOf);
 
 	function bind(obj){
 		var s=Array.prototype.slice;
@@ -180,6 +180,6 @@
 		bound.prototype=new n();
 		return bound;
 	}
-	Function.prototype.bind = Function.prototype.bind || bind;
+	Function.prototype.bind || (Function.prototype.bind = bind);
 
 })();
