@@ -152,7 +152,7 @@
 		for(var k in this)
 			if(this[k]==v) return k;
 		return -1;
-	};
+	}
 
 	Object.prototype.indexOf = Object.prototype.indexOf || indexOf;
 	Array.prototype.indexOf = Array.prototype.indexOf || indexOf;
