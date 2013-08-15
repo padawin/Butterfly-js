@@ -3,6 +3,7 @@
 
 	var setAttribute='setAttribute';
 	var getAttribute='getAttribute';
+	var appendChild = 'appendChild';
 
 	var ex=function(v){return v!=null && v!=undefined;};
 	B.exists=ex;
@@ -58,7 +59,6 @@
 
 	B.create=function(n,att,p){
 		var e;
-		var appendChild = 'appendChild';
 		if(n=='text')
 			e=document.createTextNode(att['value']);
 		else{
