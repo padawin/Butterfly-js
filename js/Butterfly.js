@@ -93,9 +93,9 @@
 			if(!ex(p.element)) $id(p)[appendChild](e);
 			else{
 				//if the elem has to be inserted before an element
-				if(ex($id(p.before))) $id(p.element).insertBefore(e, $id(p.before));
+				if(ex($id(p.before))) $id(p.element).insertBefore(e,$id(p.before));
 				//else if it has to be inserted after an element
-				else if(ex($id(p.after)) && ex($id(p.after).nextSibling)) $id(p.element).insertBefore(e ,$id(p.after).nextSibling);
+				else if(ex($id(p.after)) && ex($id(p.after).nextSibling)) $id(p.element).insertBefore(e,$id(p.after).nextSibling);
 				//else append
 				else $id(p.element)[appendChild](e);
 			}
