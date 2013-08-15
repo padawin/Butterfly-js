@@ -145,7 +145,8 @@
 	};
 
 	B.getStyleValue=function(i,s){
-		return B.getStyle(i, s).replace(new RegExp('(px|pt|em)$'),'');
+		var v=B.getStyle(i, s);
+		return isNaN(parseFloat(v))?0:v;
 	};
 
 	function indexOf(v){
