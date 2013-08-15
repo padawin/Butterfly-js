@@ -19,6 +19,7 @@
 				<li><a href="#removeEvent">B.removeEvent</a></li>
 				<li><a href="#getStyle">B.getStyle and B.getStyleValue</a></li>
 				<li><a href="#create">B.create</a></li>
+				<li><a href="#appendChildren">B.appendChildren</a></li>
 			</ul>
 		</div>
 		<div id="main">
@@ -509,6 +510,47 @@
 						B.create('li', {'text': 'Created li node at the end of the list'}, {'element': B.$id('parent')});
 						B.create('li', {'text': 'Created li node at the beginning of the list'}, {'element': B.$id('parent'), 'before': B.$id('parent').firstChild});
 						B.create('li', {'text': 'Created li node at the 2nd position in the list'}, {'element': B.$id('parent'), 'after': B.$id('parent').firstChild});
+					</script>
+				</div>
+			</section>
+			<a name="appendChildren"></a><h2>B.appendChildren(node, children)</h2>
+			<section>
+				<p>
+					This method inject a collection of nodes at the end of the node's existing children.
+				</p>
+				<p>
+					This is nothing but a shortcut for the usage of appendChild in a loop.
+				</p>
+				<p>
+					<ul>
+						<li><b>node</b>: Dom node where the children nodes must be injected.</li>
+						<li><b>children</b>: Nodes to inject.</li>
+					</ul>
+				</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code" id="bar">
+&lt;ul id="empty-parent"&gt;&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;
+	var nodes = [
+		B.create('li', {'text': 'First node'}),
+		B.create('li', {'text': 'Second node'}),
+		B.create('li', {'text': 'Third node'})
+	];
+	B.appendChildren('empty-parent', nodes);
+&lt;/script&gt;
+					</pre>
+				</div>
+				<h3>Demo:</h3>
+				<div class="demo">
+					<ul id="empty-parent"></ul>
+					<script type="text/javascript">
+						var nodes = [
+							B.create('li', {'text': 'First node'}),
+							B.create('li', {'text': 'Second node'}),
+							B.create('li', {'text': 'Third node'})
+						];
+						B.appendChildren('empty-parent', nodes);
 					</script>
 				</div>
 			</section>
