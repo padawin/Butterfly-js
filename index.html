@@ -18,6 +18,7 @@
 				<li><a href="#addEvent">B.addEvent(item,event,action,opt,args)</a></li>
 				<li><a href="#removeEvent">B.removeEvent(item,event,action,opt,args)</a></li>
 				<li><a href="#getStyle">B.getStyle(item, styleKey) and B.getStyleValue(item, styleKey)</a></li>
+				<li><a href="#create">B.create(name[, attributes[, parent]])</a></li>
 			</ul>
 		</div>
 		<div id="main">
@@ -458,6 +459,63 @@
 						B.$id('get-style-element-result').innerHTML = "Width: " + B.getStyle('get-style-element', 'width') + "<br />";
 						B.$id('get-style-element-result').innerHTML += "Numeric width: " + B.getStyleValue('get-style-element', 'width') + "<br />";
 						B.$id('get-style-element-result').innerHTML += "Border: " + B.getStyle('get-style-element', 'border-top-color') + "<br />";
+					</script>
+				</div>
+			</section>
+			<a name="create"></a><h2>B.create(name[, attributes[, parent]])</h2>
+			<section>
+				<p>
+					This method create a DOM node which type is the name argument, with as
+					attributes the elements in the attributes argument and inject it in the node given as third parameter.
+					The method returns the created node.
+				</p>
+				<p>
+					<ul>
+						<li><b>name</b>: string, tag name of the node to create.</li>
+						<li><b>attributes</b>: associative array, the keys are the attributes' names, and the values are the attributes' values.</li>
+						<li>
+							<b>parent</b>: associative array, needs 2 elements, one in a "element" key, which will be the parent node and a key
+							"after" or "before" which must contain a child of the parent node. The created node will be inserted before or
+							after the corresponding node in the given parent node.
+						</li>
+					</ul>
+				</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code" id="bar">
+&lt;style type="text/css"&gt;
+	#get-style-element {
+		width: 100px;
+		height: 100px;
+		border: 1px solid black;
+	}
+&lt;/style&gt;
+&lt;ul id="parent"&gt;
+	&lt;li&gt;An element&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;
+	B.create('li', {'text': 'Created li node at the end of the list'}, {'element': B.$id('parent')});
+	B.create('li', {'text': 'Created li node at the beginning of the list'}, {'element': B.$id('parent'), 'before': B.$id('parent').firstChild});
+	B.create('li', {'text': 'Created li node at the 2nd position in the list'}, {'element': B.$id('parent'), 'after': B.$id('parent').firstChild});
+&lt;/script&gt;
+					</pre>
+				</div>
+				<h3>Demo:</h3>
+				<div class="demo" id="foo">
+					<style type="text/css">
+						#get-style-element {
+							width: 100px;
+							height: 100px;
+							border: 1px solid black;
+						}
+					</style>
+					<ul id="parent">
+						<li>An element</li>
+					</ul>
+					<script type="text/javascript">
+						B.create('li', {'text': 'Created li node at the end of the list'}, {'element': B.$id('parent')});
+						B.create('li', {'text': 'Created li node at the beginning of the list'}, {'element': B.$id('parent'), 'before': B.$id('parent').firstChild});
+						B.create('li', {'text': 'Created li node at the 2nd position in the list'}, {'element': B.$id('parent'), 'after': B.$id('parent').firstChild});
 					</script>
 				</div>
 			</section>
