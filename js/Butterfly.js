@@ -134,6 +134,8 @@
 	};
 
 	B.getStyle=function(i,s){
+		i=$id(i);
+		if (!ex(i)) return;
 		if(i.currentStyle){
 			s=s.replace(/\-(\w)/g,function(m,p1){return p1.toUpperCase();});
 			var y=i.currentStyle[s];
