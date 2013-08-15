@@ -307,11 +307,54 @@
 			<a name="removeEvent"></a><h2>B.removeEvent(item,event,action,opt,args)</h2>
 			<section>
 				<p>
-
+					This function remove a binded event.
 				</p>
+
+				<p>
+					To unbind an event, the callback function used to set the event
+					is needed.
+				</p>
+
 				<h3>Example</h3>
 				<div class="example">
 					<pre class="code">
+&lt;style type="text/css"&gt;
+	.eventbloc {
+		width: 100px;
+		height: 100px;
+		border: 1px solid black;
+	}
+&lt;/style&gt;
+&lt;button id="clickbutton2"&gt;Click me&lt;/button&gt;&lt;br /&gt;
+&lt;button id="removeeventbutton"&gt;Disable button&lt;/button&gt;&lt;br /&gt;
+&lt;script type="text/javascript"&gt;
+	var clicksRemoveEvent = 0, html = '';
+	function clickFunction(event){
+		event = event || window.event;
+		var target = event.target || event.srcElement;
+
+		clicksRemoveEvent++;
+		html = "I've been clicked ";
+		switch (clicksRemoveEvent) {
+			case 1:
+				html += 'once';
+				break;
+			case 2:
+				html += 'twice';
+				break;
+			default:
+				html += clicksRemoveEvent + ' times';
+				break;
+		}
+		target.innerHTML = html;
+	}
+	B.addEvent('clickbutton2', 'click', clickFunction);
+
+
+	B.addEvent('removeeventbutton', 'click', function(){
+		B.removeEvent('clickbutton2', 'click', clickFunction);
+	});
+&lt;/script&gt;
 					</pre>
 				</div>
 				<h3>Demo:</h3>
