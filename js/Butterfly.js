@@ -158,14 +158,14 @@
 	Array.prototype.indexOf = Array.prototype.indexOf || indexOf;
 
 	Function.prototype.bind = function(obj){
-		var s=[].slice;
+		var s=Array.prototype.slice;
 		args=s.call(arguments, 1);
 		var self=this;
 		var n=function(){};
 		bound=function(){
 			return self.apply(
 				this instanceof n ? this : ( obj || {} ),
-				args.concat(slice.call(arguments))
+				args.concat(s.call(arguments))
 			);
 		};
 		n.prototype=self.prototype;
