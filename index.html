@@ -213,16 +213,18 @@
 		border: 1px solid black;
 	}
 &lt;/style&gt;
-&lt;div id="test-addevent"&gt;I've been clicked 0 time&lt;/div&gt;
 &lt;button id="clickbutton"&gt;Click me&lt;/button&gt;&lt;br /&gt;
 &lt;span&gt;Mouse events:&lt;/span&gt;
 &lt;div id="eventbloc" class="eventbloc"&gt;&lt;/div&gt;
 &lt;script type="text/javascript"&gt;
-	var clicks = 0, e = B.$id("test-addevent"), html = '';
-	B.addEvent(B.$id('clickbutton'), 'click', function() {
-		clicks++;
+	var clicksAddEvent = 0, html = '';
+	B.addEvent(B.$id('clickbutton'), 'click', function(event){
+		event = event || window.event;
+		var target = event.target || event.srcElement;
+
+		clicksAddEvent++;
 		html = "I've been clicked ";
-		switch (clicks) {
+		switch (clicksAddEvent) {
 			case 1:
 				html += 'once';
 				break;
@@ -230,10 +232,10 @@
 				html += 'twice';
 				break;
 			default:
-				html += clicks + ' times';
+				html += clicksAddEvent + ' times';
 				break;
 		}
-		e.innerHTML = html;
+		target.innerHTML = html;
 	});
 
 
@@ -261,16 +263,18 @@
 							border: 1px solid black;
 						}
 					</style>
-					<div id="test-addevent">I've been clicked 0 time</div>
 					<button id="clickbutton">Click me</button><br />
 					<span>Mouse events:</span>
 					<div id="eventbloc" class="eventbloc"></div>
 					<script type="text/javascript">
-						var clicks = 0, e = B.$id("test-addevent"), html = '';
-						B.addEvent(B.$id('clickbutton'), 'click', function() {
-							clicks++;
+						var clicksAddEvent = 0, html = '';
+						B.addEvent(B.$id('clickbutton'), 'click', function(event){
+							event = event || window.event;
+							var target = event.target || event.srcElement;
+
+							clicksAddEvent++;
 							html = "I've been clicked ";
-							switch (clicks) {
+							switch (clicksAddEvent) {
 								case 1:
 									html += 'once';
 									break;
@@ -278,10 +282,10 @@
 									html += 'twice';
 									break;
 								default:
-									html += clicks + ' times';
+									html += clicksAddEvent + ' times';
 									break;
 							}
-							e.innerHTML = html;
+							target.innerHTML = html;
 						});
 
 
@@ -319,15 +323,17 @@
 							border: 1px solid black;
 						}
 					</style>
-					<div id="test-removeevent">I've been clicked 0 time</div>
 					<button id="clickbutton2">Click me</button><br />
-					<button id="removeeventbutton">Disable left button</button><br />
+					<button id="removeeventbutton">Disable button</button><br />
 					<script type="text/javascript">
-						var clicks = 0, e = B.$id("test-removeevent"), html = '';
-						function clickFunction(){
-							clicks++;
+						var clicksRemoveEvent = 0, html = '';
+						function clickFunction(event){
+							event = event || window.event;
+							var target = event.target || event.srcElement;
+
+							clicksRemoveEvent++;
 							html = "I've been clicked ";
-							switch (clicks) {
+							switch (clicksRemoveEvent) {
 								case 1:
 									html += 'once';
 									break;
@@ -335,10 +341,10 @@
 									html += 'twice';
 									break;
 								default:
-									html += clicks + ' times';
+									html += clicksRemoveEvent + ' times';
 									break;
 							}
-							e.innerHTML = html;
+							target.innerHTML = html;
 						}
 						B.addEvent('clickbutton2', 'click', clickFunction);
 
