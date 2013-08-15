@@ -157,7 +157,7 @@
 	Object.prototype.indexOf = Object.prototype.indexOf || indexOf;
 	Array.prototype.indexOf = Array.prototype.indexOf || indexOf;
 
-	Function.prototype.bind = function(obj){
+	function bind(obj){
 		var s=Array.prototype.slice;
 		args=s.call(arguments, 1);
 		var self=this;
@@ -171,7 +171,8 @@
 		n.prototype=self.prototype;
 		bound.prototype=new n();
 		return bound;
-	};
+	}
+	Function.prototype.bind = Function.prototype.bind || bind;
 
 	window['B']=B;
 })();
