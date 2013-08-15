@@ -148,7 +148,7 @@
 
 	B.getStyleValue=function(i,s){
 		var v=B.getStyle(i, s);
-		return isNaN(parseFloat(v))?0:v;
+		return parseFloat(v);
 	};
 
 	// Finally, set B visible to everybody
