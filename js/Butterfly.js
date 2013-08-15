@@ -130,7 +130,7 @@
 		var lC=c.length;
 		i=$id(i);
 		for(var k=0;k<lC;k++)
-			i[appendChild](c[i]);
+			i[appendChild](c[k]);
 	};
 
 	B.getStyle=function(i,s){
