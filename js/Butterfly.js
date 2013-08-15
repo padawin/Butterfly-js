@@ -149,6 +149,11 @@
 		return isNaN(parseFloat(v))?0:v;
 	};
 
+	// Finally, set B visible to everybody
+	window['B']=B;
+
+	/******** MISC NON-BUTTERFLY FEATURES **********/
+
 	function indexOf(v){
 		for(var k in this)
 			if(this[k]==v) return k;
@@ -175,5 +180,4 @@
 	}
 	Function.prototype.bind = Function.prototype.bind || bind;
 
-	window['B']=B;
 })();
