@@ -11,6 +11,7 @@
 			<ul>
 				<li><a href="#id">B.$id(id)</a></li>
 				<li><a href="#hasClass">B.hasClass(element, class)</a></li>
+				<li><a href="#setClass">B.setClass(element, class)</a></li>
 				<li><a href="#addClass">B.addClass(element, class)</a></li>
 				<li><a href="#removeClass">B.removeClass(element, class)</a></li>
 				<li><a href="#replaceClass">B.replaceClass(element, oldClass, newClass, append)</a></li>
@@ -63,6 +64,44 @@
 					<div id="test-hasclass" class="someclass someotherclass"></div>
 					<button onclick="alert(B.hasClass('test-hasclass', 'someclass') ? 'yes' : 'no');">Does "test-hasclass" has the class "someclass" ?</button>
 					<button onclick="alert(B.hasClass('test-hasclass', 'newclass') ? 'yes' : 'no');">Does "test-hasclass" has the class "newclass" ?</button>
+				</div>
+			</section>
+			<a name="setClass"></a><h2>B.setClass(element, class)</h2>
+			<section>
+				<p>
+				This function sets the class given in second argument to the
+				element given in first argument.
+				</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+.classA {
+	color: red;
+}
+.classB {
+	font-weight: bold;
+}
+&lt;/style&gt;
+&lt;div id="test-setclass"&gt;I have no class...yet&lt;/div&gt;
+&lt;button onclick="B.setClass('test-setclass', 'classA');"&gt;Set class "classA" to "test-setclass"&lt;/button&gt;
+&lt;button onclick="B.setClass('test-setclass', 'classB');"&gt;Set class "classB" to "test-setclass"&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<style type="text/css">
+					.classA {
+						color: red;
+					}
+					.classB {
+						font-weight: bold;
+					}
+					</style>
+					<div id="test-setclass">I have no class...yet</div>
+					<button onclick="B.setClass('test-setclass', 'classA');">Set class "classA" to "test-setclass"</button>
+					<button onclick="B.setClass('test-setclass', 'classB');">Set class "classB" to "test-setclass"</button>
 				</div>
 			</section>
 			<a name="addClass"></a><h2>B.addClass(element, class)</h2>
