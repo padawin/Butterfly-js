@@ -1,5 +1,5 @@
 (function(){
-	if (!window.B) throw 'Butterfly base library is needed';
+	window.B || throw 'Butterfly base library is needed';
 	var B.Ajax={};
 
 	/**
@@ -19,24 +19,19 @@
 		var scripts=[];
 		while(s){
 			//return the position of the first script open tag (<script>)
-			posStart = s.search(scriptBeginRegexp);
-			valueStart = s.match(scriptBeginRegexp);
-			//if a script is found
-			if(~posStart)
-				pos1=posStart;
-			else
-				pos1=s.length-1;
+			posStart=s.search(scriptBeginRegexp);
+			valueStart=s.match(scriptBeginRegexp);
+			//if a script is found, set pos1 at the script position
+			pos1=(~posStart?posStart:s.length-1);
 			if(!~posStart){
 				//stop the loop
 				pos2=s.length-1;
 				val2=0;
 			}else{
-				posEnd = s.search(scriptEndRegexp);
-				valueEnd = s.match(scriptEndRegexp);
-				if(~posEnd)
-					pos2=posEnd;
-				else
-					pos2=s.length - 1;
+				posEnd=s.search(scriptEndRegexp);
+				valueEnd=s.match(scriptEndRegexp);
+				//if a script is found, set pos2 at the script position
+				pos2=(~posEnd?posEnd:s.length-1);
 				scripts.push(s.subsing(pos1+valueStart[0].length,pos2));
 				val2=valueEnd[0].length;
 			}
@@ -45,7 +40,7 @@
 		return scripts;
 	}
 
-		/**
+	/**
 	 *
 	 * behaviors : functions for what to do on each status ans readyState
 	 *
@@ -56,41 +51,48 @@
 		!options && options={};
 
 		var xhr;
-		if(window.XMLHttpRequest)
-			xhr = new XMLHttpRequest();
-		else if(window.ActiveXObject)
-			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+		else if(window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP");
 
 		if(xhr){
-			xhr.onreadystatechange = function()
-			{
-				if(xhr.readyState  == 4) {
-					if(behaviorsStatus[xhr.status]) {
-						var func = behaviorsStatus[xhr.status];
-						func(xhr);
-					}
-				}
-				else {
-					if (behaviorsReadyState[xhr.readyState]) {
-						var func = behaviorsReadyState[xhr.readyState];
-						func(xhr);
-					}
-				}
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4)
+					behaviorsStatus[xhr.status] && (behaviorsStatus[xhr.status])(xhr);
+				else
+					behaviorsReadyState[xhr.readyState] && (behaviorsReadyState[xhr.readyState])(xhr);
 			};
 
-			xhr.open( method == 'POST' ? method : 'GET', url,  (Butterfly.exists(options.async) ? options.async : true));
+			xhr.open(method=='POST'?method:'GET',url,B.exists(options.async)?options.async:true);
 
-			if (method == 'POST') {
-				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhr.setRequestHeader("Content-length", params.length);
-				xhr.setRequestHeader("Connection", "close");
+			if(method=='POST'){
+				xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				xhr.setRequestHeader("Content-length",params.length);
+				xhr.setRequestHeader("Connection","close");
 			}
 
-			xhr.send( method == 'POST' ? params : null );
+			xhr.send(method=='POST'?params:null);
 
 			return xhr;
 		}
-	}
+	};
+
+
+	B.Ajax.update=function(nodeToUpdate,url,evalScripts,method,params,options){
+		var updateFunc=function(xhr){
+			$id(nodeToUpdate).innerHTML = xhr.responseText;
+			// WHY timeout???
+			setTimeout(function(){
+				if(evalScripts){
+					var scripts=getScripts(xhr.responseText);
+					var nbScripts=scripts.length;
+					for(var i in scripts) window.eval(scripts[i]);
+				}
+			},700);
+		};
+
+		B.Ajax.request(url,{200:updateFunc},{},method,params,options);
+	};
+
 })();
 /**
  *
@@ -158,28 +160,6 @@ Butterfly.Ajax = {
 
 			return xhr;
 		}
-	},
-
-	update: function(nodeToUpdate, url, evalScripts, method, params, options)
-	{
-		Butterfly.Ajax.request(url, {200: function(xhr)
-		{
-			$id(nodeToUpdate).innerHTML = xhr.responseText;
-
-			setTimeout(
-				function()
-				{
-					if (evalScripts) {
-						var scripts = Butterfly.Ajax._getScriptsFromString(xhr.responseText);
-						var nbScripts = scripts.length;
-						for (var i = 0 ; i < nbScripts ; i ++) {
-							window.eval(scripts[i]);
-						}
-					}
-				},
-				700
-			);
-		}}, {}, method, params, options);
 	},
 
 	/**
