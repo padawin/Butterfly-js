@@ -2,140 +2,158 @@
 	<head>
 		<script type="text/javascript" src="js/Butterfly.js"></script>
 		<script type="text/javascript" src="js/Butterfly/Ajax.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://padawin.github.io/stylesheets/stylesheet.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<header>
-			<h1>Butterfly - One more Javascript lib. - Ajax</h1>
-		</header>
-		<div id="summary">
-			<ul>
-				<li><a href="index.html">Butterfly</a></li>
-				<li>Ajax
+
+		<!-- HEADER -->
+		<div id="header_wrap" class="outer">
+			<header class="inner">
+			  <a id="forkme_banner" href="https://github.com/padawin/Butterfly-js">View on GitHub</a>
+
+			  <h1 id="project_title">Butterfly - Another Javascript library.</h1>
+			  <h2 id="project_tagline"></h2>
+
+			</header>
+		</div>
+
+		<!-- MAIN CONTENT -->
+		<div id="main_content_wrap" class="outer">
+			<div id="summary">
+				<ul>
+					<li><a href="index.html"><span>Butterfly</span></a></li>
+					<li><span>Ajax</span>
+						<ul>
+							<li><a href="#request">B.Ajax.request</a></li>
+							<li><a href="#update">B.Ajax.update</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<section id="main_content" class="inner">
+				<a name="request"></a><h2>B.Ajax.request(url, behaviorsStatus, behaviorsReadyState, method, params, options)</h2>
+				<section>
+					<p>
+						Method to execute a XMLHttpRequest call.
+					</p>
+					<p>
+						The function arguments are:
+					</p>
 					<ul>
-						<li><a href="#request">B.Ajax.request</a></li>
-						<li><a href="#update">B.Ajax.update</a></li>
+						<li>url: Url to call.</li>
+						<li>
+							behaviorsStatus: Associative array of functions. The
+							keys are HTTP status (404, 200...) and the values are
+							callbacks to execute according to the response's status.
+						</li>
+						<li>
+							behaviorsReadyState: Associative array of functions. The
+							keys are XMLHttpRequest possible states (0 to 4) and the
+							values are callbacks to execute according to the
+							XMLHttpRequest current state when the onreadystatechange
+							event is fired.
+						</li>
+						<li>
+							method: HTTP method to use for the call.
+						</li>
+						<li>
+							params: Associative array of parameters to use in the
+							call.
+						</li>
+						<li>
+							options: Options to use for the request set up. For the
+							moment, the only option is: async (boolean), if true,
+							the call will be asynchronous.
+						</li>
 					</ul>
-				</li>
-			</ul>
-		</div>
-		<div id="main">
-			<a name="request"></a><h2>B.Ajax.request(url, behaviorsStatus, behaviorsReadyState, method, params, options)</h2>
-			<section>
-				<p>
-					Method to execute a XMLHttpRequest call.
-				</p>
-				<p>
-					The function arguments are:
-				</p>
-				<ul>
-					<li>url: Url to call.</li>
-					<li>
-						behaviorsStatus: Associative array of functions. The
-						keys are HTTP status (404, 200...) and the values are
-						callbacks to execute according to the response's status.
-					</li>
-					<li>
-						behaviorsReadyState: Associative array of functions. The
-						keys are XMLHttpRequest possible states (0 to 4) and the
-						values are callbacks to execute according to the
-						XMLHttpRequest current state when the onreadystatechange
-						event is fired.
-					</li>
-					<li>
-						method: HTTP method to use for the call.
-					</li>
-					<li>
-						params: Associative array of parameters to use in the
-						call.
-					</li>
-					<li>
-						options: Options to use for the request set up. For the
-						moment, the only option is: async (boolean), if true,
-						the call will be asynchronous.
-					</li>
-				</ul>
-				<h3>Example</h3>
-				<div class="example">
-					<pre class="code">
-&lt;input type="button" id="button-ajax" value="click me"/&gt;
-&lt;script type="text/javascript"&gt;
-	B.addEvent(B.$id('button-ajax'), 'click', function(){
-		B.Ajax.request('test-ajax.html', {200: function(result){
-			B.$id('button-ajax').value = result.responseText;}
+					<h3>Example</h3>
+					<div class="example">
+						<pre class="code">
+	&lt;input type="button" id="button-ajax" value="click me"/&gt;
+	&lt;script type="text/javascript"&gt;
+		B.addEvent(B.$id('button-ajax'), 'click', function(){
+			B.Ajax.request('test-ajax.html', {200: function(result){
+				B.$id('button-ajax').value = result.responseText;}
+			});
 		});
-	});
-&lt;/script&gt;
-					</pre>
-				</div>
-				<h3>Demo:</h3>
-				<div class="demo">
-					<input type="button" id="button-ajax" value="click me"/>
-					<script type="text/javascript">
-						B.addEvent(B.$id('button-ajax'), 'click', function(){
-							B.Ajax.request('test-ajax.html', {200: function(result){
-								B.$id('button-ajax').value = result.responseText;}
+	&lt;/script&gt;
+						</pre>
+					</div>
+					<h3>Demo:</h3>
+					<div class="demo">
+						<input type="button" id="button-ajax" value="click me"/>
+						<script type="text/javascript">
+							B.addEvent(B.$id('button-ajax'), 'click', function(){
+								B.Ajax.request('test-ajax.html', {200: function(result){
+									B.$id('button-ajax').value = result.responseText;}
+								});
 							});
-						});
-					</script>
-				</div>
+						</script>
+					</div>
+				</section>
+				<a name="request"></a><h2>B.Ajax.update(nodeToUpdate, url, evalScripts, method, params, options)</h2>
+				<section>
+					<p>
+						Method to update a DOM node with the result of a
+						XMLHttpRequest call.
+					</p>
+					<p>
+						The function arguments are:
+					</p>
+					<ul>
+						<li>
+							nodeToUpdate: DOM node in which the response will be
+							appended.
+						</li>
+						<li>url: Url to call.</li>
+						<li>
+							evalScripts: If true, the  javascript scripts being in
+							the response will be executed.
+						</li>
+						<li>
+							method: HTTP method to use for the call.
+						</li>
+						<li>
+							params: Associative array of parameters to use in the
+							call.
+						</li>
+						<li>
+							options: Options to use for the request set up. For the
+							moment, the only option is: async (boolean), if true,
+							the call will be asynchronous.
+						</li>
+					</ul>
+					<h3>Example</h3>
+					<div class="example">
+						<pre class="code">
+	&lt;div id="to-update"&gt;My content will change&lt;/div&gt;
+	&lt;input type="button" id="button-update" value="click me"/&gt;
+	&lt;script type="text/javascript"&gt;
+		B.addEvent(B.$id('button-update'), 'click', function(){
+			B.Ajax.update('to-update', 'test-ajax-update.html');
+		});
+	&lt;/script&gt;
+						</pre>
+					</div>
+					<h3>Demo:</h3>
+					<div class="demo">
+						<div id="to-update">My content will change</div>
+						<input type="button" id="button-update" value="click me"/>
+						<script type="text/javascript">
+							B.addEvent(B.$id('button-update'), 'click', function(){
+								B.Ajax.update('to-update', 'test-ajax-update.html');
+							});
+						</script>
+					</div>
+				</section>
 			</section>
-			<a name="request"></a><h2>B.Ajax.update(nodeToUpdate, url, evalScripts, method, params, options)</h2>
-			<section>
-				<p>
-					Method to update a DOM node with the result of a
-					XMLHttpRequest call.
-				</p>
-				<p>
-					The function arguments are:
-				</p>
-				<ul>
-					<li>
-						nodeToUpdate: DOM node in which the response will be
-						appended.
-					</li>
-					<li>url: Url to call.</li>
-					<li>
-						evalScripts: If true, the  javascript scripts being in
-						the response will be executed.
-					</li>
-					<li>
-						method: HTTP method to use for the call.
-					</li>
-					<li>
-						params: Associative array of parameters to use in the
-						call.
-					</li>
-					<li>
-						options: Options to use for the request set up. For the
-						moment, the only option is: async (boolean), if true,
-						the call will be asynchronous.
-					</li>
-				</ul>
-				<h3>Example</h3>
-				<div class="example">
-					<pre class="code">
-&lt;div id="to-update"&gt;My content will change&lt;/div&gt;
-&lt;input type="button" id="button-update" value="click me"/&gt;
-&lt;script type="text/javascript"&gt;
-	B.addEvent(B.$id('button-update'), 'click', function(){
-		B.Ajax.update('to-update', 'test-ajax-update.html');
-	});
-&lt;/script&gt;
-					</pre>
-				</div>
-				<h3>Demo:</h3>
-				<div class="demo">
-					<div id="to-update">My content will change</div>
-					<input type="button" id="button-update" value="click me"/>
-					<script type="text/javascript">
-						B.addEvent(B.$id('button-update'), 'click', function(){
-							B.Ajax.update('to-update', 'test-ajax-update.html');
-						});
-					</script>
-				</div>
-			</section>
+
+		<!-- FOOTER  -->
+		<div id="footer_wrap" class="outer">
+		  <footer class="inner">
+			<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+		  </footer>
 		</div>
-		<footer></footer>
 	</body>
 </html>
