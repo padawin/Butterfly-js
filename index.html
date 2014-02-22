@@ -1,0 +1,565 @@
+<html>
+	<head>
+		<script type="text/javascript" src="js/Butterfly.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<header>
+			<h1>Butterfly - One more Javascript lib.</h1>
+		</header>
+		<div id="summary">
+			<ul>
+				<li>Butterfly
+					<ul>
+						<li><a href="#id">B.$id</a></li>
+						<li><a href="#hasClass">B.hasClass</a></li>
+						<li><a href="#setClass">B.setClass</a></li>
+						<li><a href="#addClass">B.addClass</a></li>
+						<li><a href="#removeClass">B.removeClass</a></li>
+						<li><a href="#replaceClass">B.replaceClass</a></li>
+						<li><a href="#addEvent">B.addEvent</a></li>
+						<li><a href="#removeEvent">B.removeEvent</a></li>
+						<li><a href="#getStyle">B.getStyle and B.getStyleValue</a></li>
+						<li><a href="#create">B.create</a></li>
+						<li><a href="#appendChildren">B.appendChildren</a></li>
+					</ul>
+				</li>
+				<li><a href="ajax.html">Ajax</a></li>
+			</ul>
+		</div>
+		<div id="main">
+			<a name="id"></a><h2>B.$id(id)</h2>
+			<section>
+				<p>
+				This function returns the element having as id attribute the id
+				given in arguments.
+				</p>
+				<p>
+				If the given argument is already a DOM node, it'll be the
+				returned element of the function.
+				</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;div id="test-id"&gt;&lt;/div&gt;
+&lt;button onclick="B.$id('foo').innerHTML = 'some content'"&gt;Click me&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo:</h3>
+				<div class="demo">
+					<div id="test-id"></div>
+					<button onclick="B.$id('test-id').innerHTML = 'some content';">Click me</button>
+				</div>
+			</section>
+			<!-- Working with classes -->
+			<a name="hasClass"></a><h2>B.hasClass(element, class)</h2>
+			<section>
+				<p>
+				This function returns true if the element given in first argument
+				has the css class given in second argument.
+				</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;div id="test-hasclass" class="someclass someotherclass"&gt;&lt;/div&gt;
+&lt;button onclick="alert(B.hasClass('test-hasclass', 'someclass') ? 'yes' : 'no';"&gt;Does "test-hasclass" has the class "someclass" ?&lt;/button&gt;
+&lt;button onclick="alert(B.hasClass('test-hasclass', 'newclass') ? 'yes' : 'no';"&gt;Does "test-hasclass" has the class "newclass" ?&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<div id="test-hasclass" class="someclass someotherclass"></div>
+					<button onclick="alert(B.hasClass('test-hasclass', 'someclass') ? 'yes' : 'no');">Does "test-hasclass" has the class "someclass" ?</button>
+					<button onclick="alert(B.hasClass('test-hasclass', 'newclass') ? 'yes' : 'no');">Does "test-hasclass" has the class "newclass" ?</button>
+				</div>
+			</section>
+			<a name="setClass"></a><h2>B.setClass(element, class)</h2>
+			<section>
+				<p>
+				This function sets the class given in second argument to the
+				element given in first argument.
+				</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+.classA {
+	color: red;
+}
+.classB {
+	font-weight: bold;
+}
+&lt;/style&gt;
+&lt;div id="test-setclass"&gt;I have no class...yet&lt;/div&gt;
+&lt;button onclick="B.setClass('test-setclass', 'classA');"&gt;Set class "classA" to "test-setclass"&lt;/button&gt;
+&lt;button onclick="B.setClass('test-setclass', 'classB');"&gt;Set class "classB" to "test-setclass"&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<style type="text/css">
+					.classA {
+						color: red;
+					}
+					.classB {
+						font-weight: bold;
+					}
+					</style>
+					<div id="test-setclass">I have no class...yet</div>
+					<button onclick="B.setClass('test-setclass', 'classA');">Set class "classA" to "test-setclass"</button>
+					<button onclick="B.setClass('test-setclass', 'classB');">Set class "classB" to "test-setclass"</button>
+				</div>
+			</section>
+			<a name="addClass"></a><h2>B.addClass(element, class)</h2>
+			<section>
+				<p>
+				This function adds the class given in second argument to the
+				element given in first argument.
+				</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+.classA {
+	color: red;
+}
+.classB {
+	font-weight: bold;
+}
+&lt;/style&gt;
+&lt;div id="test-addclass"&gt;I have no class...yet&lt;/div&gt;
+&lt;button onclick="B.addClass('test-addclass', 'classA');"&gt;Add class "classA" to "test-addclass"&lt;/button&gt;
+&lt;button onclick="B.addClass('test-addclass', 'classB');"&gt;Add class "classB" to "test-addclass"&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<style type="text/css">
+					.classA {
+						color: red;
+					}
+					.classB {
+						font-weight: bold;
+					}
+					</style>
+					<div id="test-addclass">I have no class...yet</div>
+					<button onclick="B.addClass('test-addclass', 'classA');">Add class "classA" to "test-addclass"</button>
+					<button onclick="B.addClass('test-addclass', 'classB');">Add class "classB" to "test-addclass"</button>
+				</div>
+			</section>
+			<a name="removeClass"></a><h2>B.removeClass(element, class)</h2>
+			<section>
+				<p>
+				This function remove the class given in second argument from the
+				element given in first argument.
+				</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+.removeclassA {
+	color: red;
+}
+.removeclassB {
+	font-weight: bold;
+}
+&lt;/style&gt;
+&lt;div id="test-removeclass" class="removeclassA removeclassB"&gt;I have some class&lt;/div&gt;
+&lt;button onclick="B.removeClass('test-removeclass', 'removeclassA');"&gt;Remove class "removeclassA" from "test-removeclass"&lt;/button&gt;
+&lt;button onclick="B.removeClass('test-removeclass', 'removeclassB');"&gt;Remove class "removeclassB" from "test-removeclass"&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<style type="text/css">
+					.removeclassA {
+						color: red;
+					}
+					.removeclassB {
+						font-weight: bold;
+					}
+					</style>
+					<div id="test-removeclass" class="removeclassA removeclassB">I have some class</div>
+					<button onclick="B.removeClass('test-removeclass', 'removeclassA');">Remove class "removeclassA" from "test-removeclass"</button>
+					<button onclick="B.removeClass('test-removeclass', 'removeclassB');">Remove class "removeclassB" from "test-removeclass"</button>
+				</div>
+			</section>
+			<a name="replaceClass"></a><h2>B.replaceClass(element, oldClass, newClass, append)</h2>
+			<section>
+				<p>
+				This function replace the class given in second argument by the
+				class given in third argument for the element given in first
+				argument.
+				</p>
+				<p>A fourth boolean argument can be given. If its value is true
+				and the element does not have the searched class, the new class
+				will still be set.</p>
+				<p>The given element can either be a node or an element id.</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+.replaceclassA {
+	color: red;
+}
+.replaceclassB {
+	color: blue;
+}
+&lt;/style&gt;
+&lt;div id="test-replaceclass" class="replaceclassA"&gt;I have a class which will be replaced&lt;/div&gt;
+&lt;button onclick="B.replaceClass('test-replaceclass', 'replaceclassA', 'replaceclassB');"&gt;Replace "test-replaceclass"'s class "replaceclassA" by "replaceclassB"&lt;/button&gt;
+&lt;button onclick="B.replaceClass('test-replaceclass', 'replaceclassB', 'replaceclassA');"&gt;Replace "test-replaceclass"'s class "replaceclassB" by "replaceclassA"&lt;/button&gt;
+					</pre>
+				</div>
+				<h3>Demo</h3>
+				<div class="demo">
+					<style type="text/css">
+					.replaceclassA {
+						color: red;
+					}
+					.replaceclassB {
+						color: blue;
+					}
+					</style>
+					<div id="test-replaceclass" class="replaceclassA">I have a class which will be replaced</div>
+					<button onclick="B.replaceClass('test-replaceclass', 'replaceclassA', 'replaceclassB');">Replace "test-replaceclass"'s class "replaceclassA" by "replaceclassB"</button>
+					<button onclick="B.replaceClass('test-replaceclass', 'replaceclassB', 'replaceclassA');">Replace "test-replaceclass"'s class "replaceclassB" by "replaceclassA"</button>
+				</div>
+			</section>
+
+			<!-- Working with events -->
+			<a name="addEvent"></a><h2>B.addEvent(item,event,action,opt,args)</h2>
+			<section>
+				<p>
+				This function binds an event given in second argument to the element
+				given in first argument.
+				</p>
+				<p>
+				When the event is fired, the action given in third argument is executed.
+				</p>
+				<p>
+				The arguments given in fifth argument will be passed to the executed action.
+				</p>
+				<h3>Available options</h3>
+				<ul>
+					<li>skipEvent</li>
+					<li>scope</li>
+					<li>propagate</li>
+				</ul>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;button id="clickbutton"&gt;Click me&lt;/button&gt;&lt;br /&gt;
+&lt;span&gt;Mouse events:&lt;/span&gt;
+&lt;div id="eventbloc" class="eventbloc"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	var clicksAddEvent = 0, html = '';
+	B.addEvent(B.$id('clickbutton'), 'click', function(event){
+		event = event || window.event;
+		var target = event.target || event.srcElement;
+
+		clicksAddEvent++;
+		html = "I've been clicked ";
+		switch (clicksAddEvent) {
+			case 1:
+				html += 'once';
+				break;
+			case 2:
+				html += 'twice';
+				break;
+			default:
+				html += clicksAddEvent + ' times';
+				break;
+		}
+		target.innerHTML = html;
+	});
+
+
+	B.addEvent('eventbloc', 'mouseover', function() {
+		this.innerHTML = "Mouse over";
+	}, {scope: 'eventbloc', skipEvent: true});
+	B.addEvent('eventbloc', 'mouseout', function() {
+		this.innerHTML = "Mouse out";
+	}, {scope: 'eventbloc', skipEvent: true});
+	B.addEvent('eventbloc', 'mousemove', function(e) {
+		this.innerHTML = "Mouse move (" + e.clientX + ", " + e.clientY + ")";
+	}, {scope: 'eventbloc'});
+	B.addEvent('eventbloc', 'click', function() {
+		this.innerHTML = "Click";
+	}, {scope: 'eventbloc', skipEvent: true});
+&lt;/script&gt;
+					</pre>
+				</div>
+				<h3>Demo:</h3>
+				<div class="demo">
+					<button id="clickbutton">Click me</button><br />
+					<span>Mouse events:</span>
+					<div id="eventbloc" class="eventbloc"></div>
+					<script type="text/javascript">
+						var clicksAddEvent = 0, html = '';
+						B.addEvent(B.$id('clickbutton'), 'click', function(event){
+							event = event || window.event;
+							var target = event.target || event.srcElement;
+
+							clicksAddEvent++;
+							html = "I've been clicked ";
+							switch (clicksAddEvent) {
+								case 1:
+									html += 'once';
+									break;
+								case 2:
+									html += 'twice';
+									break;
+								default:
+									html += clicksAddEvent + ' times';
+									break;
+							}
+							target.innerHTML = html;
+						});
+
+
+						B.addEvent('eventbloc', 'mouseover', function() {
+							this.innerHTML = "Mouse over";
+						}, {scope: 'eventbloc', skipEvent: true});
+						B.addEvent('eventbloc', 'mouseout', function() {
+							this.innerHTML = "Mouse out";
+						}, {scope: 'eventbloc', skipEvent: true});
+						B.addEvent('eventbloc', 'mousemove', function(e) {
+							this.innerHTML = "Mouse move (" + e.clientX + ", " + e.clientY + ")";
+						}, {scope: 'eventbloc'});
+						B.addEvent('eventbloc', 'click', function() {
+							this.innerHTML = "Click";
+						}, {scope: 'eventbloc', skipEvent: true});
+					</script>
+				</div>
+			</section>
+			<a name="removeEvent"></a><h2>B.removeEvent(item,event,action,opt,args)</h2>
+			<section>
+				<p>
+					This function remove a binded event.
+				</p>
+
+				<p>
+					To unbind an event, the callback function used to set the event
+					is needed.
+				</p>
+
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;button id="clickbutton2"&gt;Click me&lt;/button&gt;&lt;br /&gt;
+&lt;button id="removeeventbutton"&gt;Disable button&lt;/button&gt;&lt;br /&gt;
+&lt;script type="text/javascript"&gt;
+	var clicksRemoveEvent = 0, html = '';
+	function clickFunction(event){
+		event = event || window.event;
+		var target = event.target || event.srcElement;
+
+		clicksRemoveEvent++;
+		html = "I've been clicked ";
+		switch (clicksRemoveEvent) {
+			case 1:
+				html += 'once';
+				break;
+			case 2:
+				html += 'twice';
+				break;
+			default:
+				html += clicksRemoveEvent + ' times';
+				break;
+		}
+		target.innerHTML = html;
+	}
+	B.addEvent('clickbutton2', 'click', clickFunction);
+
+
+	B.addEvent('removeeventbutton', 'click', function(){
+		B.removeEvent('clickbutton2', 'click', clickFunction);
+	});
+&lt;/script&gt;
+					</pre>
+				</div>
+				<h3>Demo:</h3>
+				<div class="demo">
+					<button id="clickbutton2">Click me</button><br />
+					<button id="removeeventbutton">Disable button</button><br />
+					<script type="text/javascript">
+						var clicksRemoveEvent = 0, html = '';
+						function clickFunction(event){
+							event = event || window.event;
+							var target = event.target || event.srcElement;
+
+							clicksRemoveEvent++;
+							html = "I've been clicked ";
+							switch (clicksRemoveEvent) {
+								case 1:
+									html += 'once';
+									break;
+								case 2:
+									html += 'twice';
+									break;
+								default:
+									html += clicksRemoveEvent + ' times';
+									break;
+							}
+							target.innerHTML = html;
+						}
+						B.addEvent('clickbutton2', 'click', clickFunction);
+
+
+						B.addEvent('removeeventbutton', 'click', function(){
+							B.removeEvent('clickbutton2', 'click', clickFunction);
+						});
+					</script>
+				</div>
+			</section>
+			<a name="getStyle"></a><h2>B.getStyle(item, styleKey) and B.getStyleValue(item, styleKey)</h2>
+			<section>
+				<p>
+					Those methods return the value of the style attribute styleKey of item.
+					<ul>
+						<li>getStyle: return the full value, with the units (eg. 42px)</li>
+						<li>
+							getStyle: return the numeric value, without the units (eg. 42).
+							Will return NaN if the style value is not numeric.
+						</li>
+					</ul>
+				</p>
+				<p>
+					Note: The style instructions must be full. B.getStyle(item, 'border') will return
+					'', B.getStyle(item, 'border-top-width') will return '1px' for example.
+				</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+	#get-style-element {
+		width: 100px;
+		height: 100px;
+		border: 1px solid black;
+	}
+&lt;/style&gt;
+&lt;div id="get-style-element"&gt;Element to analyse&lt;/div&gt;
+&lt;div id="get-style-element-result"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	B.$id('get-style-element-result').innerHTML = B.getStyle('get-style-element', 'width');
+&lt;/script&gt;
+					</pre>
+				</div>
+				<h3>Demo:</h3>
+				<div class="demo">
+					<style type="text/css">
+						#get-style-element {
+							width: 100px;
+							height: 100px;
+							border: 1px solid black;
+						}
+					</style>
+					<div id="get-style-element">Element to analyse</div>
+					<div id="get-style-element-result"></div>
+					<script type="text/javascript">
+						B.$id('get-style-element-result').innerHTML = "Width: " + B.getStyle('get-style-element', 'width') + "<br />";
+						B.$id('get-style-element-result').innerHTML += "Numeric width: " + B.getStyleValue('get-style-element', 'width') + "<br />";
+						B.$id('get-style-element-result').innerHTML += "Border: " + B.getStyle('get-style-element', 'border-top-color') + "<br />";
+					</script>
+				</div>
+			</section>
+			<a name="create"></a><h2>B.create(name[, attributes[, parent]])</h2>
+			<section>
+				<p>
+					This method create a DOM node which type is the name argument, with as
+					attributes the elements in the attributes argument and inject it in the node given as third parameter.
+					The method returns the created node.
+				</p>
+				<p>
+					<ul>
+						<li><b>name</b>: string, tag name of the node to create.</li>
+						<li><b>attributes</b>: associative array, the keys are the attributes' names, and the values are the attributes' values.</li>
+						<li>
+							<b>parent</b>: associative array, needs 2 elements, one in a "element" key, which will be the parent node and a key
+							"after" or "before" which must contain a child of the parent node. The created node will be inserted before or
+							after the corresponding node in the given parent node.
+						</li>
+					</ul>
+				</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code">
+&lt;style type="text/css"&gt;
+	#get-style-element {
+		width: 100px;
+		height: 100px;
+		border: 1px solid black;
+	}
+&lt;/style&gt;
+&lt;ul id="parent"&gt;
+	&lt;li&gt;An element&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;
+	B.create('li', {'text': 'Created li node at the end of the list'}, {'element': B.$id('parent')});
+	B.create('li', {'text': 'Created li node at the beginning of the list'}, {'element': B.$id('parent'), 'before': B.$id('parent').firstChild});
+	B.create('li', {'text': 'Created li node at the 2nd position in the list'}, {'element': B.$id('parent'), 'after': B.$id('parent').firstChild});
+&lt;/script&gt;
+					</pre>
+				</div>
+				<h3>Demo:</h3>
+				<div class="demo">
+					<ul id="parent">
+						<li>An element</li>
+					</ul>
+					<script type="text/javascript">
+						B.create('li', {'text': 'Created li node at the end of the list'}, {'element': B.$id('parent')});
+						B.create('li', {'text': 'Created li node at the beginning of the list'}, {'element': B.$id('parent'), 'before': B.$id('parent').firstChild});
+						B.create('li', {'text': 'Created li node at the 2nd position in the list'}, {'element': B.$id('parent'), 'after': B.$id('parent').firstChild});
+					</script>
+				</div>
+			</section>
+			<a name="appendChildren"></a><h2>B.appendChildren(node, children)</h2>
+			<section>
+				<p>
+					This method inject a collection of nodes at the end of the node's existing children.
+				</p>
+				<p>
+					This is nothing but a shortcut for the usage of appendChild in a loop.
+				</p>
+				<p>
+					<ul>
+						<li><b>node</b>: Dom node where the children nodes must be injected.</li>
+						<li><b>children</b>: Nodes to inject.</li>
+					</ul>
+				</p>
+				<h3>Example</h3>
+				<div class="example">
+					<pre class="code" id="bar">
+&lt;ul id="empty-parent"&gt;&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;
+	var nodes = [
+		B.create('li', {'text': 'First node'}),
+		B.create('li', {'text': 'Second node'}),
+		B.create('li', {'text': 'Third node'})
+	];
+	B.appendChildren('empty-parent', nodes);
+&lt;/script&gt;
+					</pre>
+				</div>
+				<h3>Demo:</h3>
+				<div class="demo">
+					<ul id="empty-parent"></ul>
+					<script type="text/javascript">
+						var nodes = [
+							B.create('li', {'text': 'First node'}),
+							B.create('li', {'text': 'Second node'}),
+							B.create('li', {'text': 'Third node'})
+						];
+						B.appendChildren('empty-parent', nodes);
+					</script>
+				</div>
+			</section>
+		</div>
+		<footer></footer>
+	</body>
+</html>
