@@ -136,12 +136,13 @@
 	B.getStyle=function(i,s){
 		i=$id(i);
 		if (!ex(i)) return;
+		var y;
 		if(i.currentStyle){
 			s=s.replace(/\-(\w)/g,function(m,p1){return p1.toUpperCase();});
-			var y=i.currentStyle[s];
+			y=i.currentStyle[s];
 		}else if(window.getComputedStyle){
 			s=s.replace(/([A-Z])/g,function(p1){return "-"+p1.toLowerCase();});
-			var y=document.defaultView.getComputedStyle(i,null).getPropertyValue(s);
+			y=document.defaultView.getComputedStyle(i,null).getPropertyValue(s);
 		}
 		return y;
 	};
@@ -167,10 +168,10 @@
 
 	function bind(obj){
 		var s=Array.prototype.slice;
-		args=s.call(arguments, 1);
+		var args=s.call(arguments, 1);
 		var self=this;
 		var n=function(){};
-		bound=function(){
+		var bound=function(){
 			return self.apply(
 				this instanceof n ? this : ( obj || {} ),
 				args.concat(s.call(arguments))
