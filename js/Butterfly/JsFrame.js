@@ -4,6 +4,7 @@
 
 	var B=window.B,
 		div='div'
+		,create = 'create'
 		,h = window.scrollMaxY + window.innerHeight
 		,framesContainer = B[create](div, {id:'jsframes'}, document.body)
 		,framesBackground = B[create](div, {'class':'jsframe-background jsframe-closed', style:'height:'+h+'px'}, framesContainer)
@@ -11,7 +12,6 @@
 
 		,eventOptions = {skipEvent:true,scope:this}
 
-		,create = 'create'
 		,firstChild = 'firstChild'
 		,addEvent = 'addEvent'
 		,removeChild = 'removeChild'
