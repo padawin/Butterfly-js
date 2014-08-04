@@ -47,7 +47,7 @@
 			rel, framePrevious, frameNext;
 
 		//events to open and close the frame
-		B[addEvent](closeText,click,this.close,eventOptions);
+		B[addEvent](closeText,click,close.bind(this),eventOptions);
 		B[addEvent](this.target,click,open,eventOptions);
 
 		//collection of frames
