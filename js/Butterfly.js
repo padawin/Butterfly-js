@@ -17,6 +17,9 @@
 			return id;
 	};
 	B.$id=$id;
+	B.$sel=function(selector) {
+		return document.querySelectorAll(selector);
+	};
 
 	var cattr=document.all?'className':'class';
 	function classRegex(c){return new RegExp('(?:\\s|^)'+c+'(?:\\s|$)');}
