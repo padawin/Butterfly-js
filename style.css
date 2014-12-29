@@ -1,0 +1,44 @@
+#main_content_wrap {
+	position: relative;
+}
+
+#summary {
+/*
+	position: absolute;
+	right: 0px;
+	top: 0px;
+*/
+/*
+	float: right;
+*/
+	background-color: white;
+	width: 100%;
+	z-index: 200;
+}
+
+#summary ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#summary > ul > li span {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#summary ul li ul li {
+	display: inline-block;
+	width: 33%;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#main_content pre.code {
+	overflow: auto;
+}
+
+.inner {
+	max-width: 1000px;
+}
