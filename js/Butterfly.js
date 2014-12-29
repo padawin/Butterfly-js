@@ -1,14 +1,13 @@
 (function(){
-	var B={};
+	var B={},
+		setAttribute='setAttribute',
+		getAttribute='getAttribute',
+		appendChild = 'appendChild',
+		cattr;
 
-	var setAttribute='setAttribute';
-	var getAttribute='getAttribute';
-	var appendChild = 'appendChild';
+	B.exists = function(v){return v!=null && v!=undefined;};
 
-	var ex=function(v){return v!=null && v!=undefined;};
-	B.exists=ex;
-
-	var $id=function(id){
+	B.$id = function(id){
 		if(typeof id=="string" && id!='')
 			return document.getElementById(id);
 		else if(id==='' || !ex(id))
@@ -16,12 +15,11 @@
 		else
 			return id;
 	};
-	B.$id=$id;
 	B.$sel=function(selector) {
 		return document.querySelectorAll(selector);
 	};
 
-	var cattr=document.all?'className':'class';
+	cattr=document.all?'className':'class';
 	function classRegex(c){return new RegExp('(?:\\s|^)'+c+'(?:\\s|$)');}
 
 	B.hasClass=function(i,c){
@@ -61,12 +59,12 @@
 	};
 
 	B.create=function(n,att,p){
-		var e;
+		var e, k;
 		if(n=='text')
 			e=document.createTextNode(att['value']);
 		else{
 			e=document.createElement(n);
-			for(var k in att){
+			for(k in att){
 				switch(k){
 				default:
 					e[setAttribute](k, att[k]);
@@ -106,7 +104,7 @@
 		return e;
 	};
 
-	B.addEvent=function(item,event,action,opt,args){
+	B.addEvent=B.on=function(item,event,action,opt,args){
 		opt=opt||{};
 		args=args||new Array();
 		item=$id(item);
@@ -130,9 +128,9 @@
 	};
 
 	B.appendChildren=function(i,c){
-		var lC=c.length;
+		var lC=c.length, k;
 		i=$id(i);
-		for(var k=0;k<lC;k++)
+		for(k=0;k<lC;k++)
 			i[appendChild](c[k]);
 	};
 
@@ -170,11 +168,11 @@
 	Array.prototype.indexOf || (Array.prototype.indexOf = indexOf);
 
 	function bind(obj){
-		var s=Array.prototype.slice;
-		var args=s.call(arguments, 1);
-		var self=this;
-		var n=function(){};
-		var bound=function(){
+		var s=Array.prototype.slice,
+			args=s.call(arguments, 1),
+			self=this,
+			n=function(){},
+			bound=function(){
 			return self.apply(
 				this instanceof n ? this : ( obj || {} ),
 				args.concat(s.call(arguments))
