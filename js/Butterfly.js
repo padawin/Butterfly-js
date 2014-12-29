@@ -3,11 +3,12 @@
 		setAttribute='setAttribute',
 		getAttribute='getAttribute',
 		appendChild = 'appendChild',
-		cattr;
+		cattr, $id, ex;
 
-	B.exists = function(v){return v!=null && v!=undefined;};
+	ex = function(v){return v!=null && v!=undefined;};
+	B.exists = ex;
 
-	B.$id = function(id){
+	$id = function(id){
 		if(typeof id=="string" && id!='')
 			return document.getElementById(id);
 		else if(id==='' || !ex(id))
@@ -15,6 +16,7 @@
 		else
 			return id;
 	};
+	B.$id = $id;
 	B.$sel=function(selector) {
 		return document.querySelectorAll(selector);
 	};
