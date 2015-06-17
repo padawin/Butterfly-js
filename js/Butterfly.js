@@ -40,7 +40,7 @@
 	B.removeClass=function(i,c){
 		i=$id(i);
 		if(ex(i) && B.hasClass(i,c)){
-			var cn=i[getAttribute](cattr).replace(classRegex(c),' ');
+			var cn=i[getAttribute](cattr).replace(classRegex(c),'').trim();
 			i[setAttribute](cattr,cn);
 		}
 	};
