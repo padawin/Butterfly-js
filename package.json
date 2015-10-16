@@ -1,0 +1,23 @@
+{
+  "name": "Butterfly-js",
+  "version": "2.0.0",
+  "description": "Javascript library",
+  "main": "butterfly.entrypoint.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:padawin/butterfly-js.git"
+  },
+  "keywords": [
+    "Javascript",
+    "utils",
+    "framework"
+  ],
+  "author": "Ghislain Rodrigues",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/padawin/Butterfly-js/issues"
+  }
+}
