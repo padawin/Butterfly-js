@@ -19,5 +19,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/padawin/Butterfly-js/issues"
+  },
+  "dependencies": {
+    "yuicompressor": "^2.4.8"
   }
 }
