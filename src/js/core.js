@@ -1,5 +1,5 @@
 if (typeof (require) != 'undefined') {
-	var loader = require('./loader.js');
+	var loader = require('./loader.js').loader;
 }
 
 loader.addModule('bCore', function () {
@@ -175,6 +175,7 @@ loader.addModule('bCore', function () {
 	B.getStyleValue = function (element, style) {
 		return parseFloat(B.getStyle(element, style));
 	};
+	module.exports = B;
 
 	// Finally, set B visible to everybody
 	return B;

@@ -131,5 +131,7 @@ function (Ajax) {
 		}
 	}
 
+	module.exports = c;
+
 	return c;
 });

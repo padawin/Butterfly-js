@@ -1,5 +1,5 @@
 if (typeof (require) != 'undefined') {
-	var loader = require('./loader.js');
+	var loader = require('./loader.js').loader;
 }
 
 // @TODO handle request for node
@@ -107,6 +107,8 @@ function (B) {
 
 		B.Ajax.request(url, {200 : updateFunc}, {}, method, params, options);
 	};
+
+	module.exports = Ajax;
 
 	return Ajax;
 });
