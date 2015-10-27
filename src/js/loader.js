@@ -11,6 +11,9 @@ var loader = (function () {
 		if (arguments.length < 2) {
 			throw 'Arguments missing';
 		}
+		else if (typeof(arguments[arguments.length - 1]) !== 'function') {
+			throw 'The module must be a function. Got: ' + arguments[arguments.length - 1] + ', ' + typeof(arguments[arguments.length - 1]);
+		}
 
 		for (a = 0; a < arguments.length; a++) {
 			if (a === 0) {
