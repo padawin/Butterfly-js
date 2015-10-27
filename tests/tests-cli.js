@@ -6,5 +6,6 @@ require('../src/js/core.js');
 require('../src/js/ajax.js');
 require('../src/js/template.js');
 require('./template.js');
+require('./loader.js');
 
 process.exit(tests.runTests(console.log));
