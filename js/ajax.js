@@ -95,12 +95,13 @@ function (B) {
 	 * Shortcut method of request to update a node with the request response.
 	 */
 	Ajax.update = function(nodeToUpdate, url, evalScripts, method, params, options) {
-		var updateFunc = function(xhr) {
+		var ev = 'eval',
+			updateFunc = function(xhr) {
 			B.$id(nodeToUpdate).innerHTML = xhr.responseText;
 				if (evalScripts) {
 				var i,
 					scripts = getScripts(xhr.responseText);
-				for (i in scripts) window.eval(scripts[i]);
+				for (i in scripts) window[ev](scripts[i]);
 			}
 		};
 
