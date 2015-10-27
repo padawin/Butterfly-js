@@ -4,9 +4,9 @@ if (typeof (require) != 'undefined') {
 
 // @TODO handle request for node
 loader.addModule('bAjax',
-'bCore'
+'bCore',
 function (B) {
-	var Ajax = {};
+	var Ajax = {}, _getScripts;
 
 	/**
 	 *

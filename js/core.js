@@ -7,7 +7,7 @@ loader.addModule('bCore', function () {
 		setAttribute = 'setAttribute',
 		getAttribute = 'getAttribute',
 		appendChild = 'appendChild',
-		cattr, $id, ex, _getScripts;
+		cattr, $id, ex;
 
 	ex = function (v) {return v != null && v != undefined;};
 	B.exists = ex;
@@ -67,8 +67,8 @@ loader.addModule('bCore', function () {
 
 	B.create = function (tag, attributes, parent) {
 		var element, k;
-		if (n == 'text')
-			element = document.createTextNode(att['value']);
+		if (tag == 'text')
+			element = document.createTextNode(attributes['value']);
 		else {
 			element = document.createElement(tag);
 			for (k in attributes) {
@@ -99,7 +99,7 @@ loader.addModule('bCore', function () {
 
 		//if the parent is given, the created node will be put in it
 		if (ex($id(parent)) || parent && ex($id(parent.element))) {
-			if (!ex(parent.element)) $id(p)[appendChild](element);
+			if (!ex(parent.element)) $id(parent)[appendChild](element);
 			else {
 				//if the elem has to be inserted before an element
 				if (ex($id(parent.before)))
@@ -148,7 +148,7 @@ loader.addModule('bCore', function () {
 	};
 
 	B.appendChildren = function (element, children) {
-		var lC = children.length, k;
+		var k;
 		element = $id(element);
 		for (k = 0; k < children.length; k++)
 			element[appendChild](children[k]);

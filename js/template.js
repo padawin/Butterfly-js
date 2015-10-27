@@ -2,7 +2,9 @@ if (typeof (require) != 'undefined') {
 	var loader = require('./loader.js').loader;
 }
 
-loader.addModule('c', function () {
+loader.addModule('c',
+'bAjax',
+function (Ajax) {
 	var c = {},
 		_parseMatch,
 		regexTemplate = /\[\[(.+?)]]/g,
@@ -84,7 +86,7 @@ loader.addModule('c', function () {
 
 	_url = function (templateName, data, callback) {
 		var html;
-		B.Ajax.request(savedTemplates[templateName].url, {
+		Ajax.request(savedTemplates[templateName].url, {
 			200: function (xhr) {
 				html = xhr.responseText;
 			}
@@ -93,7 +95,6 @@ loader.addModule('c', function () {
 	};
 
 	_template = function (template, data) {
-		var match;
 		template = template.replace(regexTemplate, function () {
 			// parse match
 			return _parseMatch(arguments[1])(data);
