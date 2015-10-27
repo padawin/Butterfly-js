@@ -1,5 +1,0 @@
-- Core of Butterfly 1
-- Module loader (from s-cape)
-- Custom event manager (from s-cape)
-- View manager (interaction with the DOM, with registration of events)
-- Template engine
