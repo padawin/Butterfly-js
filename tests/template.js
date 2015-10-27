@@ -206,7 +206,12 @@ I am a smith</p>'
 				Tests.equals(template.compile('template'), '<p>I am [[theMissingOne]]</p>');
 			}
 			catch (e) {
-				Tests.equals(e.message, 'Cannot read property \'theMissingOne\' of undefined');
+				if (typeof(document) == 'undefined') {
+					Tests.equals(e.message, 'Cannot read property \'theMissingOne\' of undefined');
+				}
+				else {
+					Tests.equals(e.message, 'result is undefined');
+				}
 			}
 
 			Tests.equals(template.compile('template', {thePresentOne: true}), '<p>I am undefined</p>');
