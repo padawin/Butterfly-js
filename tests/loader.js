@@ -40,6 +40,35 @@ loader.executeModule('lTests', 'Tests', function (Tests) {
 			});
 
 			Tests.equals(a, 1);
+		},
+
+		/**
+		 * Test of the load unexisting module
+		 */
+		function () {
+			try {
+				loader.executeModule('existing', 'nonExisting', function (foo) {
+					Tests.equals(true, false);
+				});
+			}
+			catch (e) {
+				Tests.equals(e, 'Unknown module nonExisting included by existing');
+			}
+		},
+
+		/**
+		 * Test of the load already loaded module
+		 */
+		function () {
+			try {
+				loader.addModule('someModule', function () {});
+				loader.addModule('someModule', function () {
+					Tests.equals(true, false);
+				});
+			}
+			catch (e) {
+				Tests.equals(e, 'The module someModule already exists');
+			}
 		}
 	]);
 });
