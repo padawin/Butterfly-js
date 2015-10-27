@@ -6,8 +6,5 @@
   "scripts": {
     "test": "node tests-cli.js"
   },
-  "author": "Ghislain Rodrigues",
-  "devDependencies": {
-    "colors": "^1.1.0"
-  }
+  "author": "Ghislain Rodrigues"
 }

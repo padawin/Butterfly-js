@@ -1,5 +1,5 @@
 /* global require, process */
-var tests = require('./tests.js').Tests;
+var tests = require('../src/js/tests.js').Tests;
 require('./tests-of-tests.js');
 require('../src/js/loader.js');
 require('../src/js/core.js');
