@@ -28,6 +28,12 @@ loader.executeModule('lTests', 'Tests', function (Tests) {
 			});
 
 			Tests.equals(testModule == loader.getModule('testModule'), true);
+			try {
+				loader.getModule('unexistingModule');
+			}
+			catch (e) {
+				Tests.equals(e, 'Unknown module unexistingModule');
+			}
 		},
 
 		/**
@@ -68,6 +74,39 @@ loader.executeModule('lTests', 'Tests', function (Tests) {
 			}
 			catch (e) {
 				Tests.equals(e, 'The module someModule already exists');
+			}
+		},
+
+		/**
+		 * Test of loading or executing a module with not enough arguments
+		 */
+		function () {
+			try {
+				loader.addModule('missingArgsModule');
+			}
+			catch (e) {
+				Tests.equals(e, 'Arguments missing');
+			}
+
+			try {
+				loader.addModule('missingArgsModule', 'foo');
+			}
+			catch (e) {
+				Tests.equals(e, 'The module must be a function. Got: foo, string');
+			}
+
+			try {
+				loader.executeModule('missingArgsModule');
+			}
+			catch (e) {
+				Tests.equals(e, 'Arguments missing');
+			}
+
+			try {
+				loader.executeModule('missingArgsModule', 'foo');
+			}
+			catch (e) {
+				Tests.equals(e, 'The module must be a function. Got: foo, string');
 			}
 		}
 	]);
