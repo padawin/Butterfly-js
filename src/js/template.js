@@ -131,7 +131,9 @@ function (Ajax) {
 		}
 	}
 
-	module.exports = c;
+	if (typeof (exports) != 'undefined') {
+		exports.template = c;
+	}
 
 	return c;
 });

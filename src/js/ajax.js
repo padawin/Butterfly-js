@@ -108,7 +108,9 @@ function (B) {
 		B.Ajax.request(url, {200 : updateFunc}, {}, method, params, options);
 	};
 
-	module.exports = Ajax;
+	if (typeof (exports) != 'undefined') {
+		exports.Ajax = Ajax;
+	}
 
 	return Ajax;
 });

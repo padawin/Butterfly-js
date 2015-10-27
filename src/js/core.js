@@ -178,7 +178,9 @@ loader.addModule('bCore', function () {
 		};
 	}
 
-	module.exports = B;
+	if (typeof (exports) != 'undefined') {
+		exports.B = B;
+	}
 
 	// Finally, set B visible to everybody
 	return B;
