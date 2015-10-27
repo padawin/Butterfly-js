@@ -2,7 +2,7 @@ if (typeof (require) != 'undefined') {
 	var loader = require('./loader.js').loader;
 }
 
-loader.addModule('c',
+loader.addModule('bTemplate',
 'bAjax',
 function (Ajax) {
 	var c = {},

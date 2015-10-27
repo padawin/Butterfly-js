@@ -2,7 +2,7 @@ if (typeof (require) != 'undefined') {
 	var loader = require('./loader.js').loader;
 }
 
-loader.addModule('events', function () {
+loader.addModule('bEvents', function () {
 	var events = {},
 		Events;
 
