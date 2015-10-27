@@ -1,6 +1,6 @@
 /* global exports, require */
 if (typeof (require) != 'undefined') {
-	var loader = require('../js/loader.js').loader,
+	var loader = require('../src/js/loader.js').loader,
 		color = require('colors/safe');
 }
 

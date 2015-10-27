@@ -1,7 +1,7 @@
 var compressor = require('yuicompressor');
 var fs = require('fs');
 
-var files = ['js/loader.js', 'js/core.js', 'js/ajax.js', 'js/template.js', 'js/events.js'];
+var files = ['src/js/loader.js', 'src/js/core.js', 'src/js/ajax.js', 'src/js/template.js', 'src/js/events.js'];
 var file = 'dist/butterfly.min.js';
 var dir = './dist';
 

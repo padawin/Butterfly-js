@@ -1,7 +1,7 @@
 /* global require */
 
 if (typeof (require) != 'undefined') {
-	var loader = require('../js/loader.js').loader;
+	var loader = require('../src/js/loader.js').loader;
 }
 
 loader.executeModule('TestsOfTests', 'Tests', function (Tests) {
