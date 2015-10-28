@@ -1,0 +1,10 @@
+{
+  "name": "butterflyjs-tests",
+  "version": "0.0.0",
+  "description": "Tests for the ButterflyJs Framework",
+  "main": "tests-cli.js",
+  "scripts": {
+    "test": "node tests-cli.js"
+  },
+  "author": "Ghislain Rodrigues"
+}
