@@ -9,6 +9,19 @@ loader.executeModule('coreWebTests', 'bCore', 'Tests', function (B, Tests) {
 		 */
 		function () {
 			Tests.isA(B.exists, 'function');
+			Tests.isA(B.$id, 'function');
+			Tests.isA(B.$sel, 'function');
+			Tests.isA(B.hasClass, 'function');
+			Tests.isA(B.addClass, 'function');
+			Tests.isA(B.removeClass, 'function');
+			Tests.isA(B.replaceClass, 'function');
+			Tests.isA(B.setClass, 'function');
+			Tests.isA(B.create, 'function');
+			Tests.isA(B.on, 'function');
+			Tests.isA(B.off, 'function');
+			Tests.isA(B.appendChildren, 'function');
+			Tests.isA(B.getStyle, 'function');
+			Tests.isA(B.getStyleValue, 'function');
 		},
 
 		/**
