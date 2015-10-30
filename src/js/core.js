@@ -27,7 +27,7 @@ loader.addModule('bCore', function () {
 		};
 
 		cattr = document.all ? 'className' : 'class';
-		function classRegex(c) {return new RegExp('( ? :\\s|^)'+c+'( ? :\\s|$)');}
+		function classRegex (c) {return new RegExp('(?:\\s|^)' + c + '(?:\\s|$)');}
 
 		B.hasClass = function (element, className) {
 			element = $id(element);
