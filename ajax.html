@@ -1,158 +1,190 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
 <html>
 	<head>
-		<script type="text/javascript" src="js/Butterfly.js"></script>
-		<link rel="stylesheet" type="text/css" href="http://padawin.github.io/stylesheets/stylesheet.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+		<link rel="stylesheet" href="stylesheets/github-dark.css">
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+		<script type="text/javascript" src="dist/butterfly.min.js"></script>
+		<script type="text/javascript">
+			hljs.initHighlightingOnLoad();
+			var B = loader.getModule('bCore');
+			B.Ajax = loader.getModule('bAjax');
+		</script>
+		<title>Butterfly-js</title>
+		<meta name="description" content="Mini javascript library, to provide a couple of shortcuts without acting like a swiss army knife...">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
 	</head>
+
 	<body>
-
-		<!-- HEADER -->
-		<div id="header_wrap" class="outer">
-			<header class="inner">
-			  <a id="forkme_banner" href="https://github.com/padawin/Butterfly-js">View on GitHub</a>
-
-			  <h1 id="project_title">Butterfly - Another Javascript library.</h1>
-			  <h2 id="project_tagline"></h2>
-
+		<div class="wrapper">
+			<header>
+				<h1 class="title">Butterfly-js</h1>
 			</header>
-		</div>
-
-		<!-- MAIN CONTENT -->
-		<div id="main_content_wrap" class="outer">
-			<div id="summary">
-				<ul>
-					<li><a href="core.html"><span>Butterfly</span></a></li>
-					<li><span>Ajax</span>
-						<ul>
-							<li><a href="#request">B.Ajax.request</a></li>
-							<li><a href="#update">B.Ajax.update</a></li>
-						</ul>
-					</li>
-				</ul>
+			<div id="container">
+				<p class="tagline">Mini javascript library, to provide a couple of shortcuts without acting like a swiss army knife...</p>
+				<div id="main" role="main">
+					<div class="download-bar">
+					<div class="inner">
+						<a href="https://github.com/padawin/Butterfly-js/tarball/master" class="download-button tar"><span>Download</span></a>
+						<a href="https://github.com/padawin/Butterfly-js/zipball/master" class="download-button zip"><span>Download</span></a>
+						<a href="https://github.com/padawin/Butterfly-js" class="code">View Butterfly-js on GitHub</a>
+					</div>
+					<span class="blc"></span><span class="trc"></span>
+					</div>
+					<article class="markdown-body">
+						<h3>Butterfly JS Ajax module documentation</h3>
+						<div id="summary">
+							<a href="index.html"><span>Home</span></a>
+							<ul>
+								<li><a href="core.html"><span>Core</span></a></li>
+								<li><span>Ajax</span>
+									<ul>
+										<li><a href="#request">B.Ajax.request</a></li>
+										<li><a href="#update">B.Ajax.update</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<section id="main_content" class="inner">
+							<a name="request"></a><h2>B.Ajax.request(url, behaviorsStatus, behaviorsReadyState, method, params, options)</h2>
+							<section>
+								<p>
+									Method to execute a XMLHttpRequest call.
+								</p>
+								<p>
+									The function arguments are:
+								</p>
+								<ul>
+									<li>url: Url to call.</li>
+									<li>
+										behaviorsStatus: Associative array of functions. The
+										keys are HTTP status (404, 200...) and the values are
+										callbacks to execute according to the response's status.
+									</li>
+									<li>
+										behaviorsReadyState: Associative array of functions. The
+										keys are XMLHttpRequest possible states (0 to 4) and the
+										values are callbacks to execute according to the
+										XMLHttpRequest current state when the onreadystatechange
+										event is fired.
+									</li>
+									<li>
+										method: HTTP method to use for the call.
+									</li>
+									<li>
+										params: Associative array of parameters to use in the
+										call.
+									</li>
+									<li>
+										options: Options to use for the request set up. For the
+										moment, the only option is: async (boolean), if true,
+										the call will be asynchronous.
+									</li>
+								</ul>
+								<h3>Example</h3>
+								<div class="example">
+									<pre><code class="html">&lt;input type="button" id="button-ajax" value="click me"/&gt;
+&lt;script type="text/javascript"&gt;
+	B.on(B.$id('button-ajax'), 'click', function(){
+		B.Ajax.request('test-ajax.html', {200: function(result){
+			B.$id('button-ajax').value = result.responseText;}
+		});
+	});
+&lt;/script&gt;</code></pre>
+								</div>
+								<h3>Demo:</h3>
+								<div class="demo">
+									<input type="button" id="button-ajax" value="click me"/>
+									<script type="text/javascript">
+										B.on(B.$id('button-ajax'), 'click', function(){
+											B.Ajax.request('test-ajax.html', {200: function(result){
+												B.$id('button-ajax').value = result.responseText;}
+											});
+										});
+									</script>
+								</div>
+							</section>
+							<a name="request"></a><h2>B.Ajax.update(nodeToUpdate, url, evalScripts, method, params, options)</h2>
+							<section>
+								<p>
+									Method to update a DOM node with the result of a
+									XMLHttpRequest call.
+								</p>
+								<p>
+									The function arguments are:
+								</p>
+								<ul>
+									<li>
+										nodeToUpdate: DOM node in which the response will be
+										appended.
+									</li>
+									<li>url: Url to call.</li>
+									<li>
+										evalScripts: If true, the  javascript scripts being in
+										the response will be executed.
+									</li>
+									<li>
+										method: HTTP method to use for the call.
+									</li>
+									<li>
+										params: Associative array of parameters to use in the
+										call.
+									</li>
+									<li>
+										options: Options to use for the request set up. For the
+										moment, the only option is: async (boolean), if true,
+										the call will be asynchronous.
+									</li>
+								</ul>
+								<h3>Example</h3>
+								<div class="example">
+									<pre><code class="html">&lt;div id="to-update"&gt;My content will change&lt;/div&gt;
+&lt;input type="button" id="button-update" value="click me"/&gt;
+&lt;script type="text/javascript"&gt;
+	B.on(B.$id('button-update'), 'click', function(){
+		B.Ajax.update('to-update', 'test-ajax-update.html');
+	});
+&lt;/script&gt;</code></pre>
+								</div>
+								<h3>Demo:</h3>
+								<div class="demo">
+									<div id="to-update">My content will change</div>
+									<input type="button" id="button-update" value="click me"/>
+									<script type="text/javascript">
+										B.on(B.$id('button-update'), 'click', function(){
+											B.Ajax.update('to-update', 'test-ajax-update.html');
+										});
+									</script>
+								</div>
+							</section>
+						</section>
+					</article>
+				</div>
 			</div>
-			<section id="main_content" class="inner">
-				<a name="request"></a><h2>B.Ajax.request(url, behaviorsStatus, behaviorsReadyState, method, params, options)</h2>
-				<section>
-					<p>
-						Method to execute a XMLHttpRequest call.
-					</p>
-					<p>
-						The function arguments are:
-					</p>
-					<ul>
-						<li>url: Url to call.</li>
-						<li>
-							behaviorsStatus: Associative array of functions. The
-							keys are HTTP status (404, 200...) and the values are
-							callbacks to execute according to the response's status.
-						</li>
-						<li>
-							behaviorsReadyState: Associative array of functions. The
-							keys are XMLHttpRequest possible states (0 to 4) and the
-							values are callbacks to execute according to the
-							XMLHttpRequest current state when the onreadystatechange
-							event is fired.
-						</li>
-						<li>
-							method: HTTP method to use for the call.
-						</li>
-						<li>
-							params: Associative array of parameters to use in the
-							call.
-						</li>
-						<li>
-							options: Options to use for the request set up. For the
-							moment, the only option is: async (boolean), if true,
-							the call will be asynchronous.
-						</li>
-					</ul>
-					<h3>Example</h3>
-					<div class="example">
-						<pre class="code">
-	&lt;input type="button" id="button-ajax" value="click me"/&gt;
-	&lt;script type="text/javascript"&gt;
-		B.addEvent(B.$id('button-ajax'), 'click', function(){
-			B.Ajax.request('test-ajax.html', {200: function(result){
-				B.$id('button-ajax').value = result.responseText;}
-			});
-		});
-	&lt;/script&gt;
-						</pre>
-					</div>
-					<h3>Demo:</h3>
-					<div class="demo">
-						<input type="button" id="button-ajax" value="click me"/>
-						<script type="text/javascript">
-							B.addEvent(B.$id('button-ajax'), 'click', function(){
-								B.Ajax.request('test-ajax.html', {200: function(result){
-									B.$id('button-ajax').value = result.responseText;}
-								});
-							});
-						</script>
-					</div>
-				</section>
-				<a name="request"></a><h2>B.Ajax.update(nodeToUpdate, url, evalScripts, method, params, options)</h2>
-				<section>
-					<p>
-						Method to update a DOM node with the result of a
-						XMLHttpRequest call.
-					</p>
-					<p>
-						The function arguments are:
-					</p>
-					<ul>
-						<li>
-							nodeToUpdate: DOM node in which the response will be
-							appended.
-						</li>
-						<li>url: Url to call.</li>
-						<li>
-							evalScripts: If true, the  javascript scripts being in
-							the response will be executed.
-						</li>
-						<li>
-							method: HTTP method to use for the call.
-						</li>
-						<li>
-							params: Associative array of parameters to use in the
-							call.
-						</li>
-						<li>
-							options: Options to use for the request set up. For the
-							moment, the only option is: async (boolean), if true,
-							the call will be asynchronous.
-						</li>
-					</ul>
-					<h3>Example</h3>
-					<div class="example">
-						<pre class="code">
-	&lt;div id="to-update"&gt;My content will change&lt;/div&gt;
-	&lt;input type="button" id="button-update" value="click me"/&gt;
-	&lt;script type="text/javascript"&gt;
-		B.addEvent(B.$id('button-update'), 'click', function(){
-			B.Ajax.update('to-update', 'test-ajax-update.html');
-		});
-	&lt;/script&gt;
-						</pre>
-					</div>
-					<h3>Demo:</h3>
-					<div class="demo">
-						<div id="to-update">My content will change</div>
-						<input type="button" id="button-update" value="click me"/>
-						<script type="text/javascript">
-							B.addEvent(B.$id('button-update'), 'click', function(){
-								B.Ajax.update('to-update', 'test-ajax-update.html');
-							});
-						</script>
-					</div>
-				</section>
-			</section>
+			<footer>
+				<div class="owner">
+				<p><a href="https://github.com/padawin" class="avatar"><img src="https://avatars2.githubusercontent.com/u/211438?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/padawin">padawin</a> maintains <a href="https://github.com/padawin/Butterfly-js">Butterfly-js</a></p>
 
-		<!-- FOOTER  -->
-		<div id="footer_wrap" class="outer">
-		  <footer class="inner">
-			<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-		  </footer>
+
+				</div>
+				<div class="creds">
+					<small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+				</div>
+			</footer>
 		</div>
+		<div class="current-section">
+			<a href="#top">Scroll to top</a>
+			<a href="https://github.com/padawin/Butterfly-js/tarball/master" class="tar">tar</a><a href="https://github.com/padawin/Butterfly-js/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+			<p class="name"></p>
+		</div>
+
+		<script type="text/javascript">
+		</script>
 	</body>
 </html>
