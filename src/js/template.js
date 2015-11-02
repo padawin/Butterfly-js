@@ -13,6 +13,18 @@ function (Ajax) {
 		_url;
 
 	_parseMatch = function (template) {
+		function _parseExpression (expression, data) {
+			var result = data, current;
+
+			expression = expression.split('.');
+			while (expression.length) {
+				if ((current = expression.shift()) != '') {
+					result = result[current];
+				}
+			}
+			return result;
+		}
+
 		/*
 		 * allowed commands:
 		 * expression
@@ -22,25 +34,15 @@ function (Ajax) {
 		 * if expression then template
 		 */
 		var regexExpression = /^[a-zA-Z_$][0-9a-zA-Z_$]*(?:\.[a-zA-Z_$][0-9a-zA-Z_$]*)*$/g,
-			regexEach = /^each\s+([a-zA-Z_$][0-9a-zA-Z_$]*)\s+as\s+([a-zA-Z_$][0-9a-zA-Z_$]*)\s+on\s+([a-zA-Z_$\-0-9]+)$/,
-			regexIf = /^if\s+([a-zA-Z_$][0-9a-zA-Z_$]*)\s+then\s+([a-zA-Z_$\-0-9]+)$/,
+			regexEach = /^each\s+([a-zA-Z_$][0-9a-zA-Z_$]*(?:\.[a-zA-Z_$][0-9a-zA-Z_$]*)*)\s+as\s+([a-zA-Z_$][0-9a-zA-Z_$]*)\s+on\s+([a-zA-Z_$\-0-9]+)$/,
+			regexIf = /^if\s+([[a-zA-Z_$][0-9a-zA-Z_$]*(?:\.[a-zA-Z_$][0-9a-zA-Z_$]*)*)\s+then\s+([a-zA-Z_$\-0-9]+)$/,
 			match;
 
 		if ((match = regexExpression.exec(template)) !== null) {
 			return function (data) {
 				var result = data, current;
 
-				if (match[0] !== template) {
-					throw "Invalid expression '" + template + "'";
-				}
-
-				match = match[0].split('.');
-				while (match.length) {
-					if ((current = match.shift()) != '') {
-						result = result[current];
-					}
-				}
-				return result;
+				return _parseExpression(match[0], data);
 			};
 		}
 		else if ((match = regexEach.exec(template)) !== null) {
@@ -48,11 +50,12 @@ function (Ajax) {
 			// match[2] -> name of the variable in each loop
 			// match[3] -> template to display for each data loop
 			return function (data) {
-				var loopable = data[match[1]],
+				var loopable = _parseExpression(match[1], data),
 					d, result = '', dataLoop;
 
-				if (typeof(data[match[1]]) != 'object') {
-					throw "Object or array expected, " + typeof(data[match[1]]) + " got";
+
+				if (typeof(loopable) != 'object') {
+					throw "Object or array expected, " + typeof(loopable) + " got";
 				}
 
 				for (d in loopable) {
@@ -67,12 +70,12 @@ function (Ajax) {
 		}
 		else if ((match = regexIf.exec(template)) !== null) {
 			// match[1] -> data to test
-			// match[3] -> template to display if the test is true
+			// match[2] -> template to display if the test is true
 			return function (data) {
 				var result = '', dataIf;
-				if (data[match[1]]) {
+				if (_parseExpression(match[1], data)) {
 					dataIf = {};
-					dataIf[match[1]] = data[match[1]];
+					dataIf[match[3]] = _parseExpression(match[1], data);
 					result = c.compile(match[2], dataIf);
 				}
 
