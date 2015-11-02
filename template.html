@@ -14,7 +14,7 @@
 		<script type="text/javascript">
 			hljs.initHighlightingOnLoad();
 			var B = loader.getModule('bCore');
-			B.Ajax = loader.getModule('bAjax');
+			B.Template = loader.getModule('bTemplate');
 		</script>
 		<title>Butterfly-js</title>
 		<meta name="description" content="Mini javascript library, to provide a couple of shortcuts without acting like a swiss army knife...">
@@ -54,25 +54,109 @@
 							</ul>
 						</div>
 						<section id="main_content" class="inner">
+							<section>
+								<p>In all the following examples, the Template module is loaded in the variable B as follow:</p>
+								<pre><code class="javascript">var B = loader.getModule('bCore');
+B.Template = loader.getModule('bTemplate');</code></pre>
+							</section>
+							<h2>Templates syntax</h2>
+							<section>
+								<p>Some commands can be executed in the templates to create some dynamic content. However no logic can be executed.</p>
+								<ul>
+									<li>
+										<b>Expression</b>: To display an expression, use: <pre><code class="html">[[expression]]</code></pre>
+										An expression is a javascript variable, or an object's attribute:
+										<pre><code class="html">[[userName]]
+[[user.name]]</code></pre>
+										This is not a valid expression and will throw an error: <pre><code class="html">[[1 + 3]]</code></pre>
+									</li>
+									<li>
+										<b>Each loop</b>: The each command allow the user to loop on an array or an object and call a template
+										on each element: <pre><code class="html">[[each LOOPABLE as ELEMENT on TEMPLATE]]</code></pre>
+										Example:
+										<pre><code class="html">[[each users as user on userTemplate]]</code></pre>
+										In this example, users is an array, and userTemplate will be applied for each user. Once in
+										userTemplate, the current user is accessible via "user" (The ELEMENT part of the each command)
+										and will be usable as follow:
+										<pre><code class="html">&lt;!-- This is in userTemplate --&gt;
+&lt;p&gt;My name is [[user.name] and I am [[user.age]]&lt;/p&gt;</code></pre>
+									</li>
+									<li>
+										<b>If command</b>: The if command allows the execution of a template, only if a condition is respected
+										or if an expression exists. The command's format is as follow:
+										<pre><code class="html">[[each ELEMENT then TEMPLATE]]</code></pre>
+										ELEMENT is then accessible in TEMPLATE as root element.
+									</li>
+								</ul>
+							</section>
 							<a name="id"></a><h2>init(templates)</h2>
 							<section>
+								<p>First the application's list of templates must be registered. This is done with the init method.</p>
+								<p>A list of templates has the following form:</p>
+								<pre><code class="javascript">{
+	templateOne: {
+		url: '/url/to/a/template.html'
+	},
+	otherTemplate: {
+		html: '&lt;p&gt;The template can also be some HTML directly&lt;/p&gt;'
+	}
+}</code></pre>
+								<ul>
+									<li>A template is identified by its key in the object ("templateOne" or "otherTemplate").</li>
+									<li>A template must have either a html content, or an URL. If it has an URL, the response of the
+										URL will be stored in a new html key to not execute the same request a second time if the template is needed again.</li>
+								</p>
 								<div class="example">
-									<pre><code class="html">
+									<pre><code class="javascript">B.Template.init({
+	loginBox: {
+		url: '/templates/login.html'
+	},
+	users: {
+		html: '&lt;ul&gt;[[each users as user on user]]&lt;/ul&gt;'
+	},
+	user: {
+		html: '&lt;li&gt;User name: [[user.name]]&lt;/li&gt;'
+	}
+});
 									</code></pre>
-								</div>
-								<h3>Demo:</h3>
-								<div class="demo">
 								</div>
 							</section>
 
-							<a name="compile"></a><h2>compile(templateName, data, callback)</h2>
+							<a name="compile"></a><h2>compile(templateName, data)</h2>
 							<section>
+								<p>Once the templates are loaded, they can be used with the compile method. This method expects up to 2 arguments:</p>
+								<ul>
+									<li>templateName: The name of the template to execute.</li>
+									<li>data: The data to compile the template with.</li>
+								</ul>
+								<p>The compile methods returns the compiled template as a HTML string.</p>
 								<div class="example">
 									<pre><code class="html">
 									</code></pre>
 								</div>
 								<h3>Demo:</h3>
 								<div class="demo">
+									<div id="usersApplication">
+										<ul id="users-list"></ul>
+										<input type="text" id="username" /><button id="add-user">Add user</button>
+										<script type="text/javascript">
+											B.Template.init({
+												users: {
+													html: '[[each users as user on user]]'
+												},
+												user: {
+													url: '/templates-demo/user.html'
+												}
+											});
+
+											var users = [];
+											B.on(B.$id('add-user'), 'click', function () {
+												var value = B.$id('username').value;
+												users.push({name: value});
+												B.$id('users-list').innerHTML = B.Template.compile('users', {users: users});
+											});
+										</script>
+									</div>
 								</div>
 							</section>
 						</section>
