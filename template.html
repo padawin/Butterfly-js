@@ -154,6 +154,7 @@ B.Template = loader.getModule('bTemplate');</code></pre>
 												var value = B.$id('username').value;
 												users.push({name: value});
 												B.$id('users-list').innerHTML = B.Template.compile('users', {users: users});
+												B.$id('username').value = "";
 											});
 										</script>
 									</div>
