@@ -136,6 +136,33 @@ I am a smith</p>'
 		},
 
 		/**
+		 * Test to compile a template with a each call with a complex expression
+		 */
+		function () {
+			template.init({
+				template: {
+					html: '<p>Donald\'s nephews are [[each donald.nephews as nephew on nephew]]</p>'
+				},
+				nephew: {
+					html: '[[nephew.name]] '
+				}
+			});
+
+			Tests.equals(
+				template.compile('template', {
+					donald: {
+						nephews: [
+							{name: 'riri'},
+							{name: 'fifi'},
+							{name: 'loulou'}
+						]
+					}
+				}),
+				'<p>Donald\'s nephews are riri fifi loulou </p>'
+			);
+		},
+
+		/**
 		 * Test to compile a template with a if call
 		 */
 		function () {
@@ -154,6 +181,44 @@ I am a smith</p>'
 			Tests.equals(
 				template.compile('template', {isTrue: true, isFalse: false}),
 				'<p>I am true</p>'
+			);
+		},
+
+		/**
+		 * Test to compile a template with a if call and a with
+		 */
+		function () {
+			template.init({
+				template: {
+					html: '<p>[[if isAdmin then admin with member]]</p>'
+				},
+				'admin': {
+					html: 'I am [[member.name]] the admin'
+				}
+			});
+
+			Tests.equals(
+				template.compile('template', {isAdmin: true, member: {name: 'John'}}),
+				'<p>I am John the admin</p>'
+			);
+		},
+
+		/**
+		 * Test to compile a template with a if call and a complex expression
+		 */
+		function () {
+			template.init({
+				template: {
+					html: '<p>[[if member.isAdmin then admin with member]]</p>'
+				},
+				'admin': {
+					html: 'I am [[member.name]] the admin'
+				}
+			});
+
+			Tests.equals(
+				template.compile('template', {member: {isAdmin: true, name: 'John'}}),
+				'<p>I am John the admin</p>'
 			);
 		},
 
