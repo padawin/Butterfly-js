@@ -131,33 +131,49 @@ B.Template = loader.getModule('bTemplate');</code></pre>
 								</ul>
 								<p>The compile methods returns the compiled template as a HTML string.</p>
 								<div class="example">
-									<pre><code class="html">
-									</code></pre>
+									<pre><code class="html">&lt;ul id="users-list"&gt;&lt;/ul&gt;
+&lt;input type="text" id="username" /&gt;&lt;button id="add-user"&gt;Add user&lt;/button&gt;
+&lt;script type="text/javascript"&gt;
+	B.Template.init({
+		users: {
+			html: '[[each users as user on user]]'
+		},
+		user: {
+			url: 'templates-demo/user.html'
+		}
+	});
+
+	var users = [];
+	B.on(B.$id('add-user'), 'click', function () {
+		var value = B.$id('username').value;
+		users.push({name: value});
+		B.$id('users-list').innerHTML = B.Template.compile('users', {users: users});
+		B.$id('username').value = "";
+	});
+&lt;/script&gt;</code></pre>
 								</div>
 								<h3>Demo:</h3>
 								<div class="demo">
-									<div id="usersApplication">
-										<ul id="users-list"></ul>
-										<input type="text" id="username" /><button id="add-user">Add user</button>
-										<script type="text/javascript">
-											B.Template.init({
-												users: {
-													html: '[[each users as user on user]]'
-												},
-												user: {
-													url: 'templates-demo/user.html'
-												}
-											});
+									<ul id="users-list"></ul>
+									<input type="text" id="username" /><button id="add-user">Add user</button>
+									<script type="text/javascript">
+										B.Template.init({
+											users: {
+												html: '[[each users as user on user]]'
+											},
+											user: {
+												url: 'templates-demo/user.html'
+											}
+										});
 
-											var users = [];
-											B.on(B.$id('add-user'), 'click', function () {
-												var value = B.$id('username').value;
-												users.push({name: value});
-												B.$id('users-list').innerHTML = B.Template.compile('users', {users: users});
-												B.$id('username').value = "";
-											});
-										</script>
-									</div>
+										var users = [];
+										B.on(B.$id('add-user'), 'click', function () {
+											var value = B.$id('username').value;
+											users.push({name: value});
+											B.$id('users-list').innerHTML = B.Template.compile('users', {users: users});
+											B.$id('username').value = "";
+										});
+									</script>
 								</div>
 							</section>
 						</section>
