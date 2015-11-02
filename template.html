@@ -84,7 +84,8 @@ B.Template = loader.getModule('bTemplate');</code></pre>
 									<li>
 										<b>If command</b>: The if command allows the execution of a template, only if a condition is respected
 										or if an expression exists. The command's format is as follow:
-										<pre><code class="html">[[each ELEMENT then TEMPLATE with DATA]]</code></pre>
+										<pre><code class="html">[[each ELEMENT then TEMPLATE with DATA]]
+[[each ELEMENT then TEMPLATE]]</code></pre>
 										If DATA is provided, it is then accessible in TEMPLATE as root element, otherwise, ELEMENT will be available as root element.
 									</li>
 								</ul>
