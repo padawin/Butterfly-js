@@ -35,7 +35,7 @@ function (Ajax) {
 		 */
 		var regexExpression = /^[a-zA-Z_$][0-9a-zA-Z_$]*(?:\.[a-zA-Z_$][0-9a-zA-Z_$]*)*$/g,
 			regexEach = /^each\s+([a-zA-Z_$][0-9a-zA-Z_$]*(?:\.[a-zA-Z_$][0-9a-zA-Z_$]*)*)\s+as\s+([a-zA-Z_$][0-9a-zA-Z_$]*)\s+on\s+([a-zA-Z_$\-0-9]+)$/,
-			regexIf = /^if\s+([[a-zA-Z_$][0-9a-zA-Z_$]*(?:\.[a-zA-Z_$][0-9a-zA-Z_$]*)*)\s+then\s+([a-zA-Z_$\-0-9]+)$/,
+			regexIf = /^if\s+([[a-zA-Z_$][0-9a-zA-Z_$]*(?:\.[a-zA-Z_$][0-9a-zA-Z_$]*)*)\s+then\s+([a-zA-Z_$\-0-9]+)(?:\s+with\s+([a-zA-Z_$][0-9a-zA-Z_$]*(?:\.[a-zA-Z_$][0-9a-zA-Z_$]*)*))?$/,
 			match;
 
 		if ((match = regexExpression.exec(template)) !== null) {
@@ -71,11 +71,14 @@ function (Ajax) {
 		else if ((match = regexIf.exec(template)) !== null) {
 			// match[1] -> data to test
 			// match[2] -> template to display if the test is true
+			// match[3] -> data to use in the template
 			return function (data) {
 				var result = '', dataIf;
 				if (_parseExpression(match[1], data)) {
 					dataIf = {};
-					dataIf[match[3]] = _parseExpression(match[1], data);
+					if (match[3] !== undefined) {
+						dataIf[match[3]] = _parseExpression(match[3], data);
+					}
 					result = c.compile(match[2], dataIf);
 				}
 
