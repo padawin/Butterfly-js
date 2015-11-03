@@ -1,5 +1,6 @@
 var compressor = require('yuicompressor');
 var fs = require('fs');
+var path = require('path');
 
 var files = ['src/js/loader.js', 'src/js/core.js'];
 var file = 'dist/butterfly.min.js';
@@ -9,6 +10,8 @@ function minify (f) {
 	if (f == files.length) {
 		return;
 	}
+
+	fs.createReadStream(files[f]).pipe(fs.createWriteStream(dir + '/' + path.basename(files[f])));
 
 	compressor.compress(files[f], {
 		//Compressor Options:
