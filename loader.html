@@ -1,0 +1,172 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+		<link rel="stylesheet" href="stylesheets/github-dark.css">
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+		<script type="text/javascript" src="dist/butterfly.min.js"></script>
+		<script type="text/javascript">
+			hljs.initHighlightingOnLoad();
+			var B = loader.getModule('B.Template');
+		</script>
+		<title>Butterfly-js</title>
+		<meta name="description" content="Mini javascript library, to provide a couple of shortcuts without acting like a swiss army knife...">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<header>
+				<h1 class="title">Butterfly-js</h1>
+			</header>
+			<div id="container">
+				<p class="tagline">Mini javascript library, to provide a couple of shortcuts without acting like a swiss army knife...</p>
+				<div id="main" role="main">
+					<div class="download-bar">
+					<div class="inner">
+						<a href="https://github.com/padawin/Butterfly-js/tarball/master" class="download-button tar"><span>Download</span></a>
+						<a href="https://github.com/padawin/Butterfly-js/zipball/master" class="download-button zip"><span>Download</span></a>
+						<a href="https://github.com/padawin/Butterfly-js" class="code">View Butterfly-js on GitHub</a>
+					</div>
+					<span class="blc"></span><span class="trc"></span>
+					</div>
+					<article class="markdown-body">
+						<h3>Butterfly JS Module Loader documentation</h3>
+						<div id="summary">
+							<a href="index.html"><span>Home</span></a>
+							<ul>
+								<li><span>Loader</span>
+									<ul>
+										<li><a href="#executeModule">executeModule</a></li>
+										<li><a href="#addModule">addModule</a></li>
+										<li><a href="#getModule">getModule</a></li>
+									</ul>
+								</li>
+								<li><a href="core.html"><span>Core</span></a></li>
+								<li><a href="ajax.html"><span>Ajax</span></a></li>
+								<li><a href="template.html"><span>Template</span></a></li>
+							</ul>
+						</div>
+						<section id="main_content" class="inner">
+							<section>
+								<p>
+									loader is a module loader used by Butterfly and usable by your application. With it,
+									you can load different modules of your application to then use them in other modules.
+								</p>
+								<p>
+									Using modules allows you to separate the layers of your code without exposing everything
+									to the global scope while making everything testable.
+								</p>
+								<p>
+									The loader allows developpers to either directly execute a module without saving it,
+									this is useful for entry point modules for example; to load a module to then use it
+									by another module or to get a loaded module, for example to use Butterfly out of the
+									modules system (cf Butterfly examples).
+								</p>
+							</section>
+
+							<h2 id="addModule">addModule(moduleName, dependencyModule1, dependencyModule2, ..., dependencyModuleN, module)</h2>
+							<section>
+								<p>
+									This method loads a module to be executed later.
+									The first argument is the module name, this name is then used to access
+									the module or inject it in another module as a dependency. The last
+									argument is the module itself. It must be a function containing the
+									module's code. The arguments in between are the names of the modules
+									the current one needs to run.
+								</p>
+								<p>
+									The added module's function must return the module itself, it can be of any needed type.
+								</p>
+								<p>
+									The module gets as arguments its depending modules, in the same order as
+									provided in the executeModule call.
+								</p>
+								<h3>Example</h3>
+								<pre><code class="javascript">loader.addModule('Car', function () {
+	var Car = function (brand) {
+		this.brand = brand;
+	};
+
+	return Car;
+});
+
+loader.addModule('Garage', 'Car', function (Car) {
+	var cars = [],
+		Garage = {
+			addCar: function (carBrand) {
+				cars.push(new Car(carBrand));
+			},
+
+			getCars: function () {
+				return cars;
+			}
+		};
+});</code></pre>
+							</section>
+
+							<h2 id="executeModule">executeModule(moduleName, dependencyModule1, dependencyModule2, ..., dependencyModuleN, module)</h2>
+							<section>
+								<p>
+									This method directly executes a module provided in the arguments.
+									The arguments of executeModule are the same as addModule. The only
+									difference is that the module name is not used and is here only for
+									readability purposes.
+								</p>
+								<h3>Example</h3>
+								<p>If we reuse our example from addModule, we can make a following 3rd module</p>
+								<pre><code class="javascript">loader.executeModule('myCarApp', 'Garage', function (myGarageModule) {
+	myGarageModule.addCar('BWM');
+	myGarageModule.addCar('Fait');
+	myGarageModule.addCar('Arton Mastin');
+
+	var cars = myGarageModule.getCars(),
+		c;
+	for (var c = 0; c &lt; cars.length; c++) {
+		console.log(cars[c].brand);
+	}
+});</code></pre>
+							</section>
+
+							<h2 id="getModule">getModule(moduleName)</h2>
+							<section>
+								<p>
+									If you want to use a module out of the module system (for example
+									Butterfly), you can get a loaded module and use it directly.
+								</p>
+								<h3>Example</h3>
+								<p>To use Butterfly without using a module, you can do:</p>
+								<pre><code class="html">&lt;script type="text/javascript" src="url/to/butterfly.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+var B = loader.getModule('B');
+console.log(B.$id('someId'));
+&lt;/script&gt;</code></pre>
+							</section>
+						</section>
+					</article>
+				</div>
+			</div>
+			<footer>
+				<div class="owner">
+				<p><a href="https://github.com/padawin" class="avatar"><img src="https://avatars2.githubusercontent.com/u/211438?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/padawin">padawin</a> maintains <a href="https://github.com/padawin/Butterfly-js">Butterfly-js</a></p>
+
+
+				</div>
+				<div class="creds">
+					<small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+				</div>
+			</footer>
+		</div>
+		<div class="current-section">
+			<a href="#top">Scroll to top</a>
+			<a href="https://github.com/padawin/Butterfly-js/tarball/master" class="tar">tar</a><a href="https://github.com/padawin/Butterfly-js/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+			<p class="name"></p>
+		</div>
+	</body>
+</html>
