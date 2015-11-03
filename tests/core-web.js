@@ -2,7 +2,7 @@ if (typeof (require) != 'undefined') {
 	var loader = require('../src/js/loader.js').loader;
 }
 
-loader.executeModule('coreWebTests', 'bCore', 'Tests', function (B, Tests) {
+loader.executeModule('coreWebTests', 'B', 'Tests', function (B, Tests) {
 	Tests.addSuite('coreWebTests', [
 		/**
 		 * Test if the methods exist
