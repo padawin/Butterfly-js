@@ -2,7 +2,8 @@ if (typeof (require) != 'undefined') {
 	var loader = require('../src/js/loader.js').loader;
 }
 
-loader.executeModule('cTests', 'bTemplate', 'Tests', function (template, Tests) {
+loader.executeModule('cTests', 'B', 'Tests', function (B, Tests) {
+	var template = B.Template;
 	Tests.addSuite('template', [
 		/**
 		 * Test if the methods exist
