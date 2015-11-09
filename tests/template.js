@@ -281,6 +281,6 @@ I am a smith</p>'
 			}
 
 			Tests.equals(template.compile('template', {thePresentOne: true}), '<p>I am undefined</p>');
-		},
+		}
 	]);
 });
