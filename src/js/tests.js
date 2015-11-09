@@ -1,6 +1,6 @@
 /* global exports, require */
 if (typeof (require) != 'undefined') {
-	var loader = require('./loader.js').loader,
+	var loader = require(__dirname + '/../../dist/butterfly.min.js').loader,
 		color = require('colors/safe');
 }
 

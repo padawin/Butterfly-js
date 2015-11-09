@@ -1,5 +1,5 @@
-if (typeof (require) != 'undefined') {
-	var loader = require('./loader.js').loader;
+if (typeof (require) != 'undefined' && typeof(loader) === 'undefined') {
+	var loader = require(__dirname + '/loader.js').loader;
 }
 
 loader.addModule('B', function () {
