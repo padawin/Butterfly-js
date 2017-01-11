@@ -367,7 +367,7 @@ loader.addModule('B', function () {
 
 		_parseMatch = function (template) {
 			function _parseExpression (expression, data) {
-				var result = data, current;
+				var result = data || [], current;
 
 				expression = expression.split('.');
 				while (expression.length) {
@@ -375,7 +375,7 @@ loader.addModule('B', function () {
 						result = result[current];
 					}
 				}
-				return result;
+				return result || [];
 			}
 
 			/*
