@@ -429,10 +429,7 @@ loader.addModule('B', function () {
 					var result = '', dataIf;
 					var condition = _parseExpression(match[1], data);
 					if (condition && condition.length != 0) {
-						dataIf = {};
-						if (match[3] !== undefined) {
-							dataIf[match[3]] = _parseExpression(match[3], data);
-						}
+						var dataIf = _parseExpression(match[3], data);
 						result = B.Template.compile(match[2], dataIf);
 					}
 
