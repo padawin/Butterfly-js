@@ -424,10 +424,10 @@ loader.addModule('B', function () {
 				// match[2] -> template to display if the test is true
 				// match[3] -> data to use in the template
 				return function (data) {
-					var result = '', dataIf;
-					var condition = _parseExpression(match[1], data);
-					if (condition && condition.length != 0) {
-						var dataIf = _parseExpression(match[3], data);
+					var result = '',
+						condition = _parseExpression(match[1], data),
+						dataIf = _parseExpression(match[3], data);
+					if (condition) {
 						result = B.Template.compile(match[2], dataIf);
 					}
 
