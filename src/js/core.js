@@ -427,7 +427,8 @@ loader.addModule('B', function () {
 				// match[3] -> data to use in the template
 				return function (data) {
 					var result = '', dataIf;
-					if (_parseExpression(match[1], data)) {
+					var condition = _parseExpression(match[1], data);
+					if (condition && condition.length != 0) {
 						dataIf = {};
 						if (match[3] !== undefined) {
 							dataIf[match[3]] = _parseExpression(match[3], data);
