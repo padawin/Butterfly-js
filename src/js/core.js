@@ -375,7 +375,7 @@ loader.addModule('B', function () {
 						result = result[current];
 					}
 				}
-				return result || [];
+				return result === undefined ? null : result;
 			}
 
 			/*
