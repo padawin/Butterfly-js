@@ -375,7 +375,7 @@ loader.addModule('B', function () {
 						result = result[current];
 					}
 				}
-				return result || [];
+				return result === undefined ? null : result;
 			}
 
 			/*
@@ -393,8 +393,6 @@ loader.addModule('B', function () {
 
 			if ((match = regexExpression.exec(template)) !== null) {
 				return function (data) {
-					var result = data, current;
-
 					return _parseExpression(match[0], data);
 				};
 			}
@@ -426,12 +424,10 @@ loader.addModule('B', function () {
 				// match[2] -> template to display if the test is true
 				// match[3] -> data to use in the template
 				return function (data) {
-					var result = '', dataIf;
-					if (_parseExpression(match[1], data)) {
-						dataIf = {};
-						if (match[3] !== undefined) {
-							dataIf[match[3]] = _parseExpression(match[3], data);
-						}
+					var result = '',
+						condition = _parseExpression(match[1], data),
+						dataIf = _parseExpression(match[3], data);
+					if (condition) {
 						result = B.Template.compile(match[2], dataIf);
 					}
 
