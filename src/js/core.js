@@ -393,8 +393,6 @@ loader.addModule('B', function () {
 
 			if ((match = regexExpression.exec(template)) !== null) {
 				return function (data) {
-					var result = data, current;
-
 					return _parseExpression(match[0], data);
 				};
 			}
