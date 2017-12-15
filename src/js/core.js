@@ -426,7 +426,7 @@ loader.addModule('B', function () {
 				return function (data) {
 					var result = '',
 						condition = _parseExpression(match[1], data),
-						dataIf = _parseExpression(match[3], data);
+						dataIf = match[3] && _parseExpression(match[3], data) || {};
 					if (condition) {
 						result = B.Template.compile(match[2], dataIf);
 					}
