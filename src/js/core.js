@@ -324,10 +324,9 @@ loader.addModule('B', function () {
 
 				xhr.open(method == 'POST' ? method : 'GET', url, B.exists(options.async) ? options.async : true);
 
-				if (method == 'POST') {
-					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					xhr.setRequestHeader("Content-length", params.length);
-					xhr.setRequestHeader("Connection", "close");
+				options.headers = options.headers || {};
+				for (var key in options.headers) {
+					xhr.setRequestHeader(key, options.headers[key]);
 				}
 
 				xhr.send(method == 'POST' ? params : null);
